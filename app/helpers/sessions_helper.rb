@@ -3,6 +3,10 @@ module SessionsHelper
 		cookies.permanent[:remember_token] = user.remember_token
 		self.current_user = user
 	end
+
+    def signed_in_user
+	  redirect_to signin_url, notice: "Please sign in." unless signed_in?
+	end
 	
 	def current_user
 		@current_user ||= User.find_by_remember_token(cookies[:remember_token])

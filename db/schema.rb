@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209142923) do
+ActiveRecord::Schema.define(:version => 20121211073107) do
+
+  create_table "routes", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
+    t.text     "map"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "routes", ["title", "created_at", "user_id"], :name => "index_routes_on_title_and_created_at_and_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"

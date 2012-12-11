@@ -11,17 +11,12 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
-
+	@showcase_items = @user.showcase
   end
 
   # GET /users/new
   def new
     @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
-    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -34,6 +29,11 @@ class UsersController < ApplicationController
 	else
 	   render 'new'
 	end
+  end
+
+  # GET /users/1/edit
+  def edit
+    @user = User.find(params[:id])
   end
 
   # PUT /users/1
@@ -56,10 +56,7 @@ class UsersController < ApplicationController
 	redirect_to users_url
   end
   
-  
-  def signed_in_user
-    redirect_to signin_url, notice: "Please sign in." unless signed_in?
-  end
+ 
   
   def correct_user
 	  @user = User.find(params[:id])

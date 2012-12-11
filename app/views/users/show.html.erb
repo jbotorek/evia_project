@@ -16,7 +16,10 @@
     </section>
   </aside>
 </div>
-
+<div class="span8">
+  <h3>User's showcase</h3>
+  <%= render 'shared/showcase', collection: @showcase_items %>
+</div>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
