@@ -1,11 +1,23 @@
 Evia::Application.routes.draw do
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
-			match '/signup', to: 'users#new'
-			match '/signin', to: 'sessions#new'
-			match '/signout', to:	'sessions#destroy', via: :delete
+
+  resources :users do
+    member do
+	  get :following, :followers					#paths will look like: user/1/following					user/3/followers
+	end
+  end
   
+  
+  resources :sessions, only: [:new, :create, :destroy]
   resources :routes, only: [:new, :create, :destroy]
+  resources :relationships, only: [:create, :destroy]
+  resources :infos
+  
+			
+	match '/signup', to: 'users#new'
+	match '/signin', to: 'sessions#new'
+	match '/signout', to:'sessions#destroy', via: :delete
+
+  
   root :to => 'static_pages#home'
 	
 

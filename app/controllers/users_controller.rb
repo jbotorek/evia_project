@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_filter :signed_in_user, only: [:index, :edit, :update]
+	before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
 	before_filter :correct_user,   only: [:edit, :update]
 	before_filter :admin_user,     only: :destroy
 
@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
+	@info = Info.find_by_user_id(@user.id)
 	@showcase_items = @user.showcase
   end
 
@@ -56,7 +57,20 @@ class UsersController < ApplicationController
 	redirect_to users_url
   end
   
- 
+  def following																	
+	@title = "Following"															
+	@user = User.find(params[:id])													
+	@users = @user.followed_users						
+	render 'show_follow'															
+  end
+
+  def followers
+	@title = "Followers"
+	@user = User.find(params[:id])
+	@users = @user.followers
+	render 'show_follow'
+  end
+	
   
   def correct_user
 	  @user = User.find(params[:id])

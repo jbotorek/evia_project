@@ -11,7 +11,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211073107) do
+ActiveRecord::Schema.define(:version => 20121212065206) do
+
+  create_table "infos", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "surname"
+    t.string   "gender"
+    t.string   "street"
+    t.string   "house_number"
+    t.string   "town"
+    t.text     "bio"
+    t.text     "image"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "infos", ["surname"], :name => "index_infos_on_surname"
+  add_index "infos", ["town"], :name => "index_infos_on_town"
+  add_index "infos", ["user_id"], :name => "index_infos_on_user_id", :unique => true
+
+  create_table "relationships", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
+  add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
+  add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
   create_table "routes", :force => true do |t|
     t.integer  "user_id"
