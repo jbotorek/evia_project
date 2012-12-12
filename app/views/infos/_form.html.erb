@@ -1,0 +1,22 @@
+<%= form_for(@info) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="field">
+    
+    <%= f.label "name" %><br />
+    <%= f.text_field :name %><br />
+	<%= f.label "surname" %><br />
+    <%= f.text_field :surname %><br />
+	<%= f.label "street" %><br />
+	<%= f.text_field :street %><br />
+	<%= f.label "house number" %><br />
+	<%= f.text_field :house_number %><br />
+	<%= f.label "town" %><br />
+	<%= f.text_field :town %><br />
+	<%= f.label "bio" %><br />
+	<%= f.text_field :bio %><br />
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

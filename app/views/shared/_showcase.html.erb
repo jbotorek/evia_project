@@ -1,0 +1,5 @@
+<% if @showcase_items.any? %>
+  <ol class="showcase">
+    <%= render 'shared/showcase_item', collection: @showcase_items %>
+  </ol>
+<% end %>
