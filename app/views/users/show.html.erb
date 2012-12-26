@@ -7,19 +7,34 @@
 
 <% provide(:title, @user.email) %>
 <div class="row">
-  <aside class="span4">
     <section>
       <h1>
         <%= gravatar_for @user %>
         <%= @user.email %>
-      </h1>
-    </section>
-  </aside>
+      </h1>	
+	  <% if @info==nil %>
+		 <h2> PERSONAL INFO NOT YED PROVIDED </h2>
+	  <% else %>
+	     <h2> PERSONAL INFO </h2>
+		 <h2> name: <%= @info.name %> <%= @info.surname %> </h2>
+		 <h2> address: <%= @info.town %>, <%= @info.street %> </h2>
+	  <% end %>
+	</section>
 </div>
-<div class="span8">
+<div>
+  <%= render 'shared/stats' %>
+</div>
+
+<span>
+<%= render 'follow_form' if signed_in? %>  SLEDUJES?
+</span>
+
+<br><br><br>
+<div>
   <h3>User's showcase</h3>
   <%= render 'shared/showcase', collection: @showcase_items %>
 </div>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
