@@ -1,0 +1,26 @@
+<% provide(:title, @route.title) %>
+<h1>
+	<%= @route.title %>
+</h1>
+<h2>Here is a map of the route</h2>
+<p>
+	<%= @route.map %>
+</p>
+
+<h2>
+	<%= @route.description %>
+</h2>
+<li>
+	<% if !current_user.want_try?(@route) %>
+		<%= link_to "Want to try", wanters_route_path(:route_id => @route.id)  %>	
+	<% else %>
+		You have already WANTED TO TRY the route <br>
+	<% end %>
+	<b><%= @route.wanters.count %></b> persons WANT TO TRY
+</li>
+<li>
+Tried it
+</li>
+<br><br><br>
+
+<%= link_to 'Back', @user %>

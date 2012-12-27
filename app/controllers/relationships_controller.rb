@@ -1,5 +1,4 @@
-class RelationshipsController < ApplicationController
-  
+class RelationshipsController < ApplicationController  
   def new
   end
   

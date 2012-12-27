@@ -16,6 +16,9 @@ class Route < ActiveRecord::Base
   
   belongs_to :user
   
+  has_many :want_try_relationships, foreign_key: "wanted_route_id", dependent: :destroy
+  has_many :wanters, through: :want_try_relationships, source: :wanter
+  
   default_scope order: 'routes.created_at DESC'
   
   validates :user_id, presence: true

@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   has_many :reverse_relationships, foreign_key: "followed_id", class_name:  "Relationship", dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
   
+  has_many :want_try_relationships, foreign_key: "wanter_id", dependent: :destroy
+  has_many :wanted_routes, through: :want_try_relationships, source: :wanted_route
+  
   has_one :info, dependent: :destroy
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -57,7 +60,18 @@ class User < ActiveRecord::Base
   def has_info?
     Info.find_by_user_id(self.id)
   end
+    
+  def want_try?(route)
+	want_try_relationships.find_by_wanted_route_id(route.id)
+  end
   
+  def want_try!(route)
+	want_try_relationships.create!(route_id: route.id)
+  end
+  
+  def not_want_try!(route)
+	want_try_relationships.find_by_route_id(route.id).destroy if self.want_try?(route)
+  end
   
   private
   def create_remember_token

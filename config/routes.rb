@@ -6,10 +6,17 @@ Evia::Application.routes.draw do
 	end
   end
   
+  resources :routes do
+    member do
+	  get 'wanters'
+	end
+  end
+  
   
   resources :sessions, only: [:new, :create, :destroy]
-  resources :routes, only: [:new, :create, :destroy]
+  resources :routes, only: [:new, :create, :destroy, :show]
   resources :relationships, only: [:create, :destroy]
+  resources :want_try_relationships, only: [:create, :destroy]
   resources :infos
   
 			
