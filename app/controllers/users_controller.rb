@@ -71,6 +71,12 @@ class UsersController < ApplicationController
 	render 'show_follow'
   end
 	
+  def allwanters
+	@route = Route.find(params[:route_id])
+	@title = "Wanters"
+	@users = @route.wanters
+	render 'show_follow'
+  end
   
   def correct_user
 	  @user = User.find(params[:id])

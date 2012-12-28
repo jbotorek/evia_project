@@ -16,7 +16,9 @@
 	<% else %>
 		You have already WANTED TO TRY the route <br>
 	<% end %>
-	<b><%= @route.wanters.count %></b> persons WANT TO TRY
+	<b><%= @route.wanters.count %></b> persons WANT TO TRY 
+	<br>
+	<div><%= link_to "See all WANTERS", allwanters_path(:route_id => @route.id) %> </div>
 </li>
 <li>
 Tried it

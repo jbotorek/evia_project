@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   
   #method showing all other posts - from other users
   def showcase
-    Route.from_users_followed_by(self)
+	showcase = Route.from_users_followed_by(self)
   end
   
   # methods for following other users
