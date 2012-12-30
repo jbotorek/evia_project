@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121230085451) do
+ActiveRecord::Schema.define(:version => 20121230132830) do
+
+  create_table "activity_types", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "infos", :force => true do |t|
     t.integer  "user_id"
@@ -42,13 +49,24 @@ ActiveRecord::Schema.define(:version => 20121230085451) do
   add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
+  create_table "route_activity_relations", :force => true do |t|
+    t.integer  "route_id"
+    t.integer  "activity_type_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "route_activity_relations", ["activity_type_id"], :name => "index_route_activity_relations_on_activity_type_id"
+  add_index "route_activity_relations", ["route_id"], :name => "index_route_activity_relations_on_route_id"
+
   create_table "routes", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
     t.text     "description"
     t.text     "map"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "activity_type_id"
   end
 
   add_index "routes", ["title", "created_at", "user_id"], :name => "index_routes_on_title_and_created_at_and_user_id"

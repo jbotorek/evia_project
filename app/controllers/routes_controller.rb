@@ -4,11 +4,19 @@ class RoutesController < ApplicationController
 	
 	def new
 	  @route = current_user.routes.build
+	  @types = ActivityType.all
 	end
 	
 	def create
 	  @route = current_user.routes.build(params[:route])
 	  if @route.save
+		activity = params[:type_ids]
+			activity.each { |act|
+			activityRelation = RouteActivityRelation.new
+			activityRelation.activity_type_id = act
+			activityRelation.route_id = @route.id
+			activityRelation.save!
+		}
 		flash[:success] = "Route created!"
 		redirect_to current_user
 	  else
@@ -25,6 +33,7 @@ class RoutesController < ApplicationController
 	def show
 	  @route = Route.find(params[:id])
 	  @user = current_user
+	  @activities = @route.activity_types
 	end
 	
 	def wanters

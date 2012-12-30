@@ -2,17 +2,18 @@
 #
 # Table name: routes
 #
-#  id          :integer          not null, primary key
-#  user_id     :integer
-#  title       :string(255)
-#  description :text
-#  map         :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id               :integer          not null, primary key
+#  user_id          :integer
+#  title            :string(255)
+#  description      :text
+#  map              :text
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  activity_type :integer
 #
 
 class Route < ActiveRecord::Base
-  attr_accessible :description, :map, :title
+  attr_accessible :description, :map, :title, :user_id, :activity_type_id
   
   belongs_to :user
   
@@ -21,6 +22,9 @@ class Route < ActiveRecord::Base
   
   has_many :tried_relationships, foreign_key: "tried_route_id", dependent: :destroy
   has_many :triers, through: :tried_relationships, source: :trier
+  
+  has_many :route_activity_relation, foreign_key: "route_id", dependent: :destroy
+  has_many :activity_types, through: :route_activity_relation, source: :activity_type
   
   default_scope order: 'routes.created_at DESC'
   

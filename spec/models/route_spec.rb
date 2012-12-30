@@ -2,13 +2,14 @@
 #
 # Table name: routes
 #
-#  id          :integer          not null, primary key
-#  user_id     :integer
-#  title       :string(255)
-#  description :text
-#  map         :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id               :integer          not null, primary key
+#  user_id          :integer
+#  title            :string(255)
+#  description      :text
+#  map              :text
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  activity_type_id :integer
 #
 
 require 'spec_helper'

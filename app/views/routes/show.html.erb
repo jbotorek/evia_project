@@ -1,15 +1,22 @@
 <% provide(:title, @route.title) %>
 <h1>
-	<%= @route.title %>
+	TITLE: <%= @route.title %>
 </h1>
 <h2>Here is a map of the route</h2>
-<p>
+<p align = center>
 	<%= @route.map %>
 </p>
 
 <h2>
-	<%= @route.description %>
+	DESCRIPTION: <%= @route.description %>
 </h2>
+<br>
+<h3>
+	The route is designated for:<br> 
+	<% @activities.each do |act| %> 
+		<%= act.title %> <br>
+	<% end %>
+</h3>
 <li>
 	<% if !current_user.want_try?(@route) %>
 		<%= link_to "Want to try", wanters_route_path(:route_id => @route.id)  %>	
