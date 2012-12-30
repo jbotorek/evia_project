@@ -15,13 +15,21 @@
 		<%= link_to "Want to try", wanters_route_path(:route_id => @route.id)  %>	
 	<% else %>
 		You have already WANTED TO TRY the route <br>
+		<%= link_to "DO NOT WANT TO TRY IT ANYMORE", unwant_route_path(:route_id => @route.id) %>
 	<% end %>
 	<b><%= @route.wanters.count %></b> persons WANT TO TRY 
 	<br>
 	<div><%= link_to "See all WANTERS", allwanters_path(:route_id => @route.id) %> </div>
 </li>
 <li>
-Tried it
+	<% if !current_user.tried?(@route) %>
+		<%= link_to "Already tried route", triers_route_path(:route_id => @route.id)  %>	
+	<% else %>
+		You have already TRIED the route <br>
+	<% end %>
+	<b><%= @route.triers.count %></b> persons TRIED THE ROUTE
+	<br>
+	<div><%= link_to "See all TRIERS", alltriers_path(:route_id => @route.id) %> </div>
 </li>
 <br><br><br>
 

@@ -2,11 +2,11 @@
 #
 # Table name: want_try_relationships
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  route_id   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  wanter_id       :integer
+#  wanted_route_id :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 
 require 'spec_helper'

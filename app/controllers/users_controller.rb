@@ -78,6 +78,13 @@ class UsersController < ApplicationController
 	render 'show_follow'
   end
   
+  def alltriers
+	@route = Route.find(params[:route_id])
+	@title = "Triers"
+	@users = @route.triers
+	render 'show_follow'
+  end
+  
   def correct_user
 	  @user = User.find(params[:id])
 	  redirect_to(root_path) unless current_user?(@user)

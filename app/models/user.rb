@@ -25,6 +25,9 @@ class User < ActiveRecord::Base
   has_many :want_try_relationships, foreign_key: "wanter_id", dependent: :destroy
   has_many :wanted_routes, through: :want_try_relationships, source: :wanted_route
   
+  has_many :tried_relationships, foreign_key: "trier_id", dependent: :destroy
+  has_many :tried_routes, through: :want_try_relationships, source: :tried_route
+  
   has_one :info, dependent: :destroy
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -70,7 +73,11 @@ class User < ActiveRecord::Base
   end
   
   def not_want_try!(route)
-	want_try_relationships.find_by_route_id(route.id).destroy if self.want_try?(route)
+	want_try_relationships.find_by_wanted_route_id(route).destroy 
+  end
+  
+  def tried?(route)
+	tried_relationships.find_by_tried_route_id(route.id)
   end
   
   private

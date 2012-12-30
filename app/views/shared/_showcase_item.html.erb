@@ -3,10 +3,10 @@
 	  <% temp_route = item %>
 	  <li>
 		<%= link_to gravatar_for(temp_route.user), temp_route.user %>
-		<span class="user">
+		<div class="user">
 		  <%= link_to item.user.email, item.user%>
-		</span>
-		<% text = item.id.to_s + " " + item.description %>
+		</div>
+		<% text = "ROUTE: " + item.title+ " " + item.description %>
 		<%= link_to text, temp_route %>
 		<span>Posted <%= time_ago_in_words(item.created_at) %> ago.</span>
 		<% if current_user?(item.user) %>
@@ -19,7 +19,7 @@
 		<%= temp_route.wanters.count %> persons WANT TO TRY
 	  </li>
 	  <li>
-		STATES THAT TRIED  -  IMPLEMENT!
+		<%= temp_route.triers.count %> persons have already TRIED the route
 	  </li>
 	  <br><br>
   <% else %>

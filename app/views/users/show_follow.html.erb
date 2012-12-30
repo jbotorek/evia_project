@@ -7,5 +7,10 @@
         <%= render 'users/user' %>
       </ul>
     <% end %>
+	<% if @route %>
+	  <%= link_to 'Back to route', @route%>	 
+	<% else %>
+	  <%= link_to 'Back to user', current_user %>
+	<% end %>
   </div>
 </div>

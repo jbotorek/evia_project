@@ -40,6 +40,25 @@ class RoutesController < ApplicationController
 		end
 	end
 	
+	def unwant		
+		@route = Route.find(params[:route_id])
+		current_user.not_want_try!(@route.id)
+		redirect_to @route
+	end
+	
+	def triers
+		@route = Route.find(params[:route_id])
+		tried = TriedRelationship.new
+		tried.trier_id = current_user.id
+		tried.tried_route_id = @route.id
+		if tried.save
+			flash[:success] = "You've TRIED the route"
+			redirect_to @route
+		else
+			redirect_to current_user
+		end
+	end
+	
 	private
 	def correct_user
 		@route = current_user.routes.find_by_id(params[:id])							
