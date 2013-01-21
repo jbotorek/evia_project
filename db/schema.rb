@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121230132830) do
+ActiveRecord::Schema.define(:version => 20130120075225) do
 
   create_table "activity_types", :force => true do |t|
     t.string   "title"
@@ -58,6 +58,17 @@ ActiveRecord::Schema.define(:version => 20121230132830) do
 
   add_index "route_activity_relations", ["activity_type_id"], :name => "index_route_activity_relations_on_activity_type_id"
   add_index "route_activity_relations", ["route_id"], :name => "index_route_activity_relations_on_route_id"
+
+  create_table "route_comment_relationships", :force => true do |t|
+    t.integer  "commenter_id"
+    t.integer  "route_id"
+    t.string   "text"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "route_comment_relationships", ["commenter_id"], :name => "index_route_comment_relationships_on_commenter_id"
+  add_index "route_comment_relationships", ["route_id"], :name => "index_route_comment_relationships_on_route_id"
 
   create_table "routes", :force => true do |t|
     t.integer  "user_id"

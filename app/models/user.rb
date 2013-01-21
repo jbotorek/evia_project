@@ -15,20 +15,29 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
   has_secure_password
   
+  #routes that created
   has_many :routes, dependent: :destroy
   
+  #"following / followed" relationship
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
   has_many :reverse_relationships, foreign_key: "followed_id", class_name:  "Relationship", dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
   
+  #want try a route relationship
   has_many :want_try_relationships, foreign_key: "wanter_id", dependent: :destroy
   has_many :wanted_routes, through: :want_try_relationships, source: :wanted_route
   
+  #tried a route relationship
   has_many :tried_relationships, foreign_key: "trier_id", dependent: :destroy
   has_many :tried_routes, through: :want_try_relationships, source: :tried_route
   
+  #personal information
   has_one :info, dependent: :destroy
+  
+  #comments for route
+  has_many :route_comment_relationships, foreign_key: "commenter_id", dependent: :destroy
+  has_many :route_comments, through: :route_comment_relationships, source: :route_comment
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: 	true,

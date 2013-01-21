@@ -34,11 +34,13 @@ class RoutesController < ApplicationController
 	  @route = Route.find(params[:id])
 	  @user = current_user
 	  @activities = @route.activity_types
+	  @comment = RouteCommentRelationship.new
+	  @allcomments = @route.all_comments(@route.id)
 	end
 	
 	def wanters
 		@route = Route.find(params[:route_id])
-		want_try = WantTryRelationship.new
+		want_try = WantTryRelationship.new	
 		want_try.wanter_id = current_user.id
 		want_try.wanted_route_id = @route.id
 		if want_try.save

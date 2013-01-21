@@ -1,0 +1,51 @@
+ROUTES - explanation
+
+ route_comment_relationships_create GET    /route_comment_relationships/create(.:format)  route_comment_relationships#create
+route_comment_relationships_destroy GET    /route_comment_relationships/destroy(.:format) route_comment_relationships#destroy
+                     following_user GET    /users/:id/following(.:format)                 users#following
+                     followers_user GET    /users/:id/followers(.:format)                 users#followers
+                              users GET    /users(.:format)                               users#index
+                                    POST   /users(.:format)                               users#create
+                           new_user GET    /users/new(.:format)                           users#new
+                          edit_user GET    /users/:id/edit(.:format)                      users#edit
+                               user GET    /users/:id(.:format)                           users#show
+                                    PUT    /users/:id(.:format)                           users#update
+                                    DELETE /users/:id(.:format)                           users#destroy
+                      wanters_route GET    /routes/:id/wanters(.:format)                  routes#wanters
+                       unwant_route GET    /routes/:id/unwant(.:format)                   routes#unwant
+                       triers_route GET    /routes/:id/triers(.:format)                   routes#triers
+                             routes GET    /routes(.:format)                              routes#index
+                                    POST   /routes(.:format)                              routes#create
+                          new_route GET    /routes/new(.:format)                          routes#new
+                         edit_route GET    /routes/:id/edit(.:format)                     routes#edit
+                              route GET    /routes/:id(.:format)                          routes#show
+                                    PUT    /routes/:id(.:format)                          routes#update
+                                    DELETE /routes/:id(.:format)                          routes#destroy
+                           sessions POST   /sessions(.:format)                            sessions#create
+                        new_session GET    /sessions/new(.:format)                        sessions#new
+                            session DELETE /sessions/:id(.:format)                        sessions#destroy
+                                    POST   /routes(.:format)                              routes#create
+                                    GET    /routes/new(.:format)                          routes#new
+                                    GET    /routes/:id(.:format)                          routes#show
+                                    DELETE /routes/:id(.:format)                          routes#destroy
+                      relationships POST   /relationships(.:format)                       relationships#create
+                       relationship DELETE /relationships/:id(.:format)                   relationships#destroy
+             want_try_relationships POST   /want_try_relationships(.:format)              want_try_relationships#create
+              want_try_relationship DELETE /want_try_relationships/:id(.:format)          want_try_relationships#destroy
+                route_comment_index POST   /route_comment(.:format)                       route_comment#create
+                      route_comment DELETE /route_comment/:id(.:format)                   route_comment#destroy
+        route_comment_relationships POST   /route_comment_relationships(.:format)         route_comment_relationships#create
+         route_comment_relationship DELETE /route_comment_relationships/:id(.:format)     route_comment_relationships#destroy
+                              infos GET    /infos(.:format)                               infos#index
+                                    POST   /infos(.:format)                               infos#create
+                           new_info GET    /infos/new(.:format)                           infos#new
+                          edit_info GET    /infos/:id/edit(.:format)                      infos#edit
+                               info GET    /infos/:id(.:format)                           infos#show
+                                    PUT    /infos/:id(.:format)                           infos#update
+                                    DELETE /infos/:id(.:format)                           infos#destroy
+                             signup        /signup(.:format)                              users#new
+                             signin        /signin(.:format)                              sessions#new
+                            signout DELETE /signout(.:format)                             sessions#destroy
+                         allwanters        /allwanters(.:format)                          users#allwanters
+                          alltriers        /alltriers(.:format)                           users#alltriers
+                               root        /                                              static_pages#home

@@ -1,0 +1,23 @@
+<%= form_for(@route) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="field">
+    <%= f.label "title" %><br />
+    <%= f.text_field :title %><br />
+	<%= f.label "description" %><br />
+    <%= f.text_field :description %><br />
+	<%= f.label "map" %><br />
+	<%= f.text_field :map %><br />
+	<ul>
+	  <% @types.each do |type| %>
+		  <li>
+			<%= check_box_tag 'type_ids[]', type.id -%>
+			<%= h type.title -%>
+		  </li>
+	  <% end %>
+	</ul>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

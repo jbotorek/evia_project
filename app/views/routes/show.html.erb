@@ -40,4 +40,34 @@
 </li>
 <br><br><br>
 
+
+<%= form_for(@comment) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">  
+	<%= hidden_field_tag :commenter_id, :value => current_user.id %>	
+	<%= hidden_field_tag :route_id, :value => @route.id %>
+    <%= f.text_area :text, placeholder: "Compose new comment..." %>
+  </div>
+  <%= f.submit "Post"%>
+<% end %>
+
+<li>
+	There is <%= @route.commenters.count %> comments for this route <br>
+	CHECK : <%=  @allcomments.count %>
+	<ul class="comments">
+	  <% @allcomments.each do |comment| %>
+		<li>
+			<p><%= comment.created_at %> comment: <%=comment.text%> <br>
+			FROM: <%= get_user(comment.commenter_id)[0]["email"]%>		<br>
+			<% if current_user.email == get_user(comment.commenter_id)[0]["email"] %>
+				<%= link_to 'REMOVE COMMENT', {:controller => 'route_comment_relationships',
+				:action => 'destroy', :id => comment.id, :route_id => @route.id }, :confirm => 'Are you sure?', :method=>:delete %>
+			<% end %>
+			</p>		  
+		</li>
+	  <% end %>
+	</ul>
+	
+</li>
+
 <%= link_to 'Back', @user %>

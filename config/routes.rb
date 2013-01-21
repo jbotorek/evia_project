@@ -8,7 +8,7 @@ Evia::Application.routes.draw do
   
   resources :routes do
     member do
-	  get 'wanters', 'unwant', 'triers'
+	  get 'wanters', 'unwant', 'triers', 'delete_photo'
 	end
   end
   
@@ -17,6 +17,8 @@ Evia::Application.routes.draw do
   resources :routes, only: [:new, :create, :destroy, :show]
   resources :relationships, only: [:create, :destroy]
   resources :want_try_relationships, only: [:create, :destroy]
+  resources :route_comment, only: [:create, :destroy]
+  resources :route_comment_relationships, only: [:create, :destroy]
   resources :infos
   
 			
@@ -24,7 +26,7 @@ Evia::Application.routes.draw do
 	match '/signin', to: 'sessions#new'
 	match '/signout', to:'sessions#destroy', via: :delete
 	match '/allwanters', to: 'users#allwanters'
-	match '/alltriers', to:'users#alltriers'
+	match '/alltriers', to:'users#alltriers'	
 
   
   root :to => 'static_pages#home'
