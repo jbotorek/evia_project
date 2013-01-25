@@ -27,7 +27,7 @@ class RoutesController < ApplicationController
 	def destroy
 	  @route.destroy
 	  flash[:success] = "Route was deleted!"
-	  redirect_to root_url
+	  redirect_to current_user
 	end
 	
 	def show

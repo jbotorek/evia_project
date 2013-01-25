@@ -15,8 +15,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
   has_secure_password
   
-  #routes that created
+  #routes/events that created
   has_many :routes, dependent: :destroy
+  has_many :events, dependent: :destroy
   
   #"following / followed" relationship
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -53,6 +54,10 @@ class User < ActiveRecord::Base
   #method showing all other posts - from other users
   def showcase
 	showcase = Route.from_users_followed_by(self)
+  end
+  
+  def showcase_events
+	showcase = Event.from_users_followed_by(self)
   end
   
   # methods for following other users

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: route_comment_relationship
+# Table name: route_comment_relationships
 #
 #  id           :integer          not null, primary key
 #  commenter_id :integer

@@ -1,0 +1,19 @@
+<%= form_for(@event) do |e| %>
+  <%= render 'shared/error_messages', object: e.object %>
+
+  <div class="field">
+    <%= e.label "title" %><br />
+    <%= e.text_field :title %><br />
+	<%= e.label "description" %><br />
+    <%= e.text_area :description %><br />
+	<%= e.label "date          |" %> Provide the date and time in a format (dd.mm.yyyy hh:mm) <br />
+	<%= e.text_field :time %><br />
+	<%= e.label "Select route for your event:" %><br />	
+	<%= e.collection_select(:route_id, @routes, :id, :title) %><br />
+	<%= e.label "Select type of your event:" %><br />
+	<%= e.collection_select(:event_type_id, @types, :id, :title)%><br />
+  </div>
+  <div class="actions">
+    <%= e.submit %>
+  </div>
+<% end %>

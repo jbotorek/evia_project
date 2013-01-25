@@ -12,7 +12,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 	@info = Info.find_by_user_id(@user.id)
-	@showcase_items = @user.showcase
+	showcase_items_uns = @user.showcase													# retrieve routes and events from DB
+	showcase_items_uns += @user.showcase_events											#
+	@showcase_items = showcase_items_uns.sort_by { |obj| obj.created_at }				# sort showcase by 'created_at' field 
+	@showcase_items.reverse!
   end
 
   # GET /users/new

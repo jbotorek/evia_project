@@ -15,8 +15,10 @@
 class Route < ActiveRecord::Base
   attr_accessible :description, :map, :title, :user_id, :activity_type_id
   
-  # user created a route
+  # user that created a route
   belongs_to :user
+  # all events where this route is used
+  has_many :events
   
   # users that want to try a route
   has_many :want_try_relationships, foreign_key: "wanted_route_id", dependent: :destroy

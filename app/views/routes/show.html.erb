@@ -1,16 +1,5 @@
 <% provide(:title, @route.title) %>
-<h1>
-	TITLE: <%= @route.title %>
-</h1>
-<h2>Here is a map of the route</h2>
-<p align = center>
-	<%= @route.map %>
-</p>
-
-<h2>
-	DESCRIPTION: <%= @route.description %>
-</h2>
-<br>
+<%= render 'routedetails' %>
 <h3>
 	The route is designated for:<br> 
 	<% @activities.each do |act| %> 

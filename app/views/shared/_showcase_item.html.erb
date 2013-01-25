@@ -1,5 +1,5 @@
 <% @showcase_items.each do |item| %>
-  <% if item.map != nil%>
+  <% if item.instance_of?(Route)%>
 	  <% temp_route = item %>
 	  <li>
 		<%= link_to gravatar_for(temp_route.user), temp_route.user %>
@@ -8,11 +8,12 @@
 		</div>
 		<% text = "ROUTE: " + item.title+ " " + item.description %>
 		<%= link_to text, temp_route %>
+		New route created:
 		<span>Posted <%= time_ago_in_words(item.created_at) %> ago.</span>
 		<% if current_user?(item.user) %>
-		<%= link_to "delete", item, method: :delete,
-										 data: { confirm: "You sure?" },
-										 title: item.title %>
+			<%= link_to "delete", item, method: :delete,
+											 data: { confirm: "You sure?" },
+											 title: item.title %>
 		<% end %>
 	  </li>
 	  <li>
@@ -22,7 +23,27 @@
 		<%= temp_route.triers.count %> persons have already TRIED the route
 	  </li>
 	  <br><br>
+	  
   <% else %>
-	<b>XXXX</b>
+	<% temp_event = item %>
+	<%= link_to gravatar_for(temp_event.user), temp_event.user %>
+	<div class="user">
+	  <%= link_to temp_event.user.email, temp_event.user%>
+	</div>
+	<div class="event">created a new event: 
+		<% text = temp_event.title + " on: "  + temp_event.time.strftime("%d.%m.%Y")%> 
+		<%= link_to text, temp_event%>
+	</div>
+	<div>
+		Posted <%= time_ago_in_words(item.created_at) %> ago.
+	</div>
+	<div>
+		<% if current_user?(temp_event.user) %>
+				<%= link_to "delete", item, method: :delete,
+											 data: { confirm: "You sure?" },
+											 title: item.title %>
+		<% end %>
+	</div>
+	<br><br>
   <% end %>
 <% end %>

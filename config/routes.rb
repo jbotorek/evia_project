@@ -1,5 +1,4 @@
 Evia::Application.routes.draw do
-
   resources :users do
     member do
 	  get :following, :followers					#paths will look like: user/1/following					user/3/followers
@@ -13,6 +12,7 @@ Evia::Application.routes.draw do
   end
   
   
+  
   resources :sessions, only: [:new, :create, :destroy]
   resources :routes, only: [:new, :create, :destroy, :show]
   resources :relationships, only: [:create, :destroy]
@@ -20,6 +20,7 @@ Evia::Application.routes.draw do
   resources :route_comment, only: [:create, :destroy]
   resources :route_comment_relationships, only: [:create, :destroy]
   resources :infos
+  resources :events
   
 			
 	match '/signup', to: 'users#new'
