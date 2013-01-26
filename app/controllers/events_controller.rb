@@ -10,14 +10,15 @@ class EventsController < ApplicationController
  
   def create
 	@event = current_user.events.build(params[:event])
+	@types = ActivityType.all						#needed for verification
+	@routes = Route.all								#needed for verification
 	@event.user_id = current_user.id
 	if @event.save
 		flash[:success] = "New Event Created!"
 		redirect_to current_user
 	else
-		flash[:success] = "New Event Was NOT Created! - check your fields!"
-			#add fields check - like in the situation of new user form!!!!
-		redirect_to new_event_path
+		flash[:notice] = "New Event Was NOT Created! - check your fields!"
+		render 'new'
 	end	
 	
   end
@@ -43,10 +44,14 @@ class EventsController < ApplicationController
   end
 
   def update
+	@event = Event.find(params[:id])		#needed for verification
+	@types = ActivityType.all				#needed for verification
+	@routes = Route.all						#needed for verification
 	if Event.find(params[:id]).update_attributes(params[:event])
 	  flash[:success] = "Event specifications updated"
 	  redirect_to current_user
 	else
+		flash[:notice] = "Event was not updated - fields must not be empty"
 		render 'edit'
 	end
   end

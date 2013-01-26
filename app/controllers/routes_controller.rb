@@ -9,19 +9,25 @@ class RoutesController < ApplicationController
 	
 	def create
 	  @route = current_user.routes.build(params[:route])
-	  if @route.save
-		activity = params[:type_ids]
-			activity.each { |act|
+	  @types = ActivityType.all
+	  activity = params[:type_ids]
+	  if activity.nil? 
+		flash[:notice] = "At least one type of route must be selected!"
+	    render :new
+	  else
+	    if @route.save
+		  activity.each { |act|
 			activityRelation = RouteActivityRelation.new
 			activityRelation.activity_type_id = act
 			activityRelation.route_id = @route.id
 			activityRelation.save!
-		}
-		flash[:success] = "Route created!"
-		redirect_to current_user
-	  else
-	    render 'new'
-	  end
+		  }
+	      flash[:success] = "Route created!"
+		  redirect_to current_user
+		  else
+			render :new
+		  end
+		end
 	end
 	
 	def destroy
