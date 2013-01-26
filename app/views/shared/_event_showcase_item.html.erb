@@ -1,0 +1,21 @@
+	<%= link_to gravatar_for(@temp_event.user), @temp_event.user %>
+	<div class="user">
+	  <%= link_to @temp_event.user.email, @temp_event.user%>
+	</div>
+	<div class="event">created a new event: 
+		<% text = @temp_event.title + " on: "  + @temp_event.time.strftime("%d.%m.%Y")%> 
+		<%= link_to text, @temp_event%>
+	</div>
+	<div>
+		Posted <%= time_ago_in_words(@temp_event.created_at) %> ago.
+	</div>
+	<div>
+		<%= @temp_event.attendees.count %> will attend
+	</div>
+	<div>
+		<% if current_user?(@temp_event.user) %>
+				<%= link_to "delete", @temp_event, method: :delete,
+											 data: { confirm: "You sure?" },
+											 title: @temp_event.title %>
+		<% end %>
+	</div>

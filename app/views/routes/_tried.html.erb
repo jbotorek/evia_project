@@ -1,0 +1,1 @@
+<li>	<% if !current_user.tried?(@route) %>		<%= link_to "Already tried route", triers_route_path(:route_id => @route.id)  %>		<% else %>		You have already TRIED the route <br>	<% end %>	<b><%= @route.triers.count %></b> persons TRIED THE ROUTE	<br>	<div><%= link_to "See all TRIERS", alltriers_path(:route_id => @route.id) %> </div></li>

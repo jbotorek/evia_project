@@ -6,57 +6,13 @@
 		<%= act.title %> <br>
 	<% end %>
 </h3>
-<li>
-	<% if !current_user.want_try?(@route) %>
-		<%= link_to "Want to try", wanters_route_path(:route_id => @route.id)  %>	
-	<% else %>
-		You have already WANTED TO TRY the route <br>
-		<%= link_to "DO NOT WANT TO TRY IT ANYMORE", unwant_route_path(:route_id => @route.id) %>
-	<% end %>
-	<b><%= @route.wanters.count %></b> persons WANT TO TRY 
-	<br>
-	<div><%= link_to "See all WANTERS", allwanters_path(:route_id => @route.id) %> </div>
-</li>
-<li>
-	<% if !current_user.tried?(@route) %>
-		<%= link_to "Already tried route", triers_route_path(:route_id => @route.id)  %>	
-	<% else %>
-		You have already TRIED the route <br>
-	<% end %>
-	<b><%= @route.triers.count %></b> persons TRIED THE ROUTE
-	<br>
-	<div><%= link_to "See all TRIERS", alltriers_path(:route_id => @route.id) %> </div>
-</li>
+
+<%= render 'want_try' %>
+<%= render 'tried' %>
+
 <br><br><br>
 
-
-<%= form_for(@comment) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">  
-	<%= hidden_field_tag :commenter_id, :value => current_user.id %>	
-	<%= hidden_field_tag :route_id, :value => @route.id %>
-    <%= f.text_area :text, placeholder: "Compose new comment..." %>
-  </div>
-  <%= f.submit "Post"%>
-<% end %>
-
-<li>
-	There is <%= @route.commenters.count %> comments for this route <br>
-	CHECK : <%=  @allcomments.count %>
-	<ul class="comments">
-	  <% @allcomments.each do |comment| %>
-		<li>
-			<p><%= comment.created_at %> comment: <%=comment.text%> <br>
-			FROM: <%= get_user(comment.commenter_id)[0]["email"]%>		<br>
-			<% if current_user.email == get_user(comment.commenter_id)[0]["email"] %>
-				<%= link_to 'REMOVE COMMENT', {:controller => 'route_comment_relationships',
-				:action => 'destroy', :id => comment.id, :route_id => @route.id }, :confirm => 'Are you sure?', :method=>:delete %>
-			<% end %>
-			</p>		  
-		</li>
-	  <% end %>
-	</ul>
-	
-</li>
+<%= render 'route_new_comment' %>
+<%= render 'route_comments_stream' %>
 
 <%= link_to 'Back', @user %>

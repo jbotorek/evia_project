@@ -1,0 +1,21 @@
+  <li>
+	<%= link_to gravatar_for(@temp_route.user), @temp_route.user %>
+	<div class="user">
+	  <%= link_to @temp_route.user.email, @temp_route.user%>
+	</div>
+	<% text = "ROUTE: " + @temp_route.title+ " " + @temp_route.description %>
+	<%= link_to text, @temp_route %>
+	New route created:
+	<span>Posted <%= time_ago_in_words(@temp_route.created_at) %> ago.</span>
+	<% if current_user?(@temp_route.user) %>
+		<%= link_to "delete", @temp_route, method: :delete,
+										 data: { confirm: "You sure?" },
+										 title: @temp_route.title %>
+	<% end %>
+  </li>
+  <li>
+	<%= @temp_route.wanters.count %> persons WANT TO TRY
+  </li>
+  <li>
+	<%= @temp_route.triers.count %> persons have already TRIED the route
+  </li>

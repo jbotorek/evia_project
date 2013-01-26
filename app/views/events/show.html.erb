@@ -9,7 +9,7 @@
 </h1>
 <h2>
 	The event takes place on: <%= @event.time.strftime("%d.%m.%Y") %><br>
-	in <%= @event.time.strftime(" %H:%M")   %>
+	in <%= @event.time.strftime(" %H:%M") %>
 </h2>
 <h2>
 	DESCRIPTION: <%= @event.description %>
@@ -18,20 +18,13 @@
 	The event is designated for: <%= @activity.title %>
 </h3>
 <br>
-<p>
-	<% if !current_user.attend?(@event) %>
-		<%= link_to "Will attend!", attend_event_path(:event_id => @event.id)  %>	
-	<% else %>
-		You are attending the event <br>
-		<%= link_to "DO NOT WANT TO ATTEND", unattend_event_path(:event_id => @event.id) %>
-	<% end %>
-</p>
+
+<%= render 'attend' %>
+
 <div align="center">
 	<%= render 'routes/routedetails' %>
 </div>
 
 <br><br><br>
-
-
 
 <%= link_to 'Back', current_user %>

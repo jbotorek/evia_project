@@ -1,13 +1,9 @@
-<p id="notice"><%= notice %></p>
-
+<% provide(:title, @user.email) %>
 <p>
   <b>Email:</b>
   <%= @user.email %>
 </p>
-
-
-<% provide(:title, @user.email) %>
-<div class="row">
+<div>
     <section>
       <h1>
         <%= gravatar_for @user %>
