@@ -40,6 +40,12 @@ class User < ActiveRecord::Base
   has_many :route_comment_relationships, foreign_key: "commenter_id", dependent: :destroy
   has_many :route_comments, through: :route_comment_relationships, source: :route_comment
   
+  #attends an event
+  has_many :event_attends, foreign_key: "attendee_id", dependent: :destroy
+  has_many :attend_events, through: :event_attends, source: :attend_event
+  
+  
+  
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: 	true,
 					format: 	{ with: VALID_EMAIL_REGEX },
@@ -92,6 +98,14 @@ class User < ActiveRecord::Base
   
   def tried?(route)
 	tried_relationships.find_by_tried_route_id(route.id)
+  end
+  
+  def attend?(event)
+	event_attends.find_by_attend_event_id(event.id)
+  end
+  
+  def unattend!(event)
+	event_attends.find_by_attend_event_id(event.id).destroy
   end
   
   private

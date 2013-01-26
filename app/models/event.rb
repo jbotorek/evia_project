@@ -19,7 +19,11 @@ class Event < ActiveRecord::Base
   #User that created the event
   belongs_to :user 
   #Route that is used in the event
-  belongs_to :route
+  belongs_to :route  
+  #Users attending the event
+  has_many :event_attends, foreign_key: "attend_event_id", dependent: :destroy
+  has_many :attendees, through: :event_attends, source: :attendee
+  
   
   validates :user_id, presence: true
   validates :route_id, presence: true

@@ -7,7 +7,13 @@ Evia::Application.routes.draw do
   
   resources :routes do
     member do
-	  get 'wanters', 'unwant', 'triers', 'delete_photo'
+	  get 'wanters', 'unwant', 'triers'
+	end
+  end
+  
+  resources :events do
+    member do
+	  get 'attend', 'unattend'
 	end
   end
   

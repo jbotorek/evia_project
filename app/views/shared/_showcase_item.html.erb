@@ -38,6 +38,9 @@
 		Posted <%= time_ago_in_words(item.created_at) %> ago.
 	</div>
 	<div>
+		<%= temp_event.attendees.count %> will attend
+	</div>
+	<div>
 		<% if current_user?(temp_event.user) %>
 				<%= link_to "delete", item, method: :delete,
 											 data: { confirm: "You sure?" },

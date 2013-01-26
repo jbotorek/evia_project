@@ -18,6 +18,14 @@
 	The event is designated for: <%= @activity.title %>
 </h3>
 <br>
+<p>
+	<% if !current_user.attend?(@event) %>
+		<%= link_to "Will attend!", attend_event_path(:event_id => @event.id)  %>	
+	<% else %>
+		You are attending the event <br>
+		<%= link_to "DO NOT WANT TO ATTEND", unattend_event_path(:event_id => @event.id) %>
+	<% end %>
+</p>
 <div align="center">
 	<%= render 'routes/routedetails' %>
 </div>
