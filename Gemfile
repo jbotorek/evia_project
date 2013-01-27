@@ -8,7 +8,7 @@ gem 'bootstrap-will_paginate', '0.0.6'
 gem 'geokit', '1.6.5'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.5'
+  gem 'pg', '0.13.2'
   gem 'rspec-rails', '2.11.0'
   gem 'annotate', '2.5.0'
 end
@@ -27,10 +27,11 @@ end
 gem 'jquery-rails'
 
 group :test do
+  gem 'pg', '0.13.2'
   gem 'capybara', '1.1.2'
   gem 'factory_girl_rails', '4.1.0'
 end
 
 group :production do
-  gem 'pg', '0.12.2'
+  gem 'pg', '0.13.2'
 end

@@ -51,8 +51,7 @@ class Route < ActiveRecord::Base
   end
   
   def all_comments(routeid)
-	all_comments = Route.find_by_sql("SELECT * FROM route_comment_relationships
-									WHERE route_id = ?", routeid.to_s)
+	all_comments = Route.find_by_sql(["SELECT * FROM route_comment_relationships WHERE (route_id = ?)", routeid])
   end
   
   

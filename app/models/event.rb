@@ -46,8 +46,8 @@ class Event < ActiveRecord::Base
   end
   
   def all_comments(eventid)
-	all_comments = Event.find_by_sql("SELECT * FROM event_comment_relationships
-									WHERE event_id = ?", eventid)
+	all_comments = Event.find_by_sql(["SELECT * FROM event_comment_relationships
+									WHERE event_id = ?", eventid])
   end
   
 end
