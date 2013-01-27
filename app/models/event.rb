@@ -23,6 +23,9 @@ class Event < ActiveRecord::Base
   #Users attending the event
   has_many :event_attends, foreign_key: "attend_event_id", dependent: :destroy
   has_many :attendees, through: :event_attends, source: :attendee
+  #Has many comments from user
+  has_many :event_comment_relationships, foreign_key: "event_id", dependent: :destroy
+  has_many :commenters, through: :event_comment_relationships, source: :commenter
   
   
   validates :user_id, presence: true
@@ -40,6 +43,11 @@ class Event < ActiveRecord::Base
                          WHERE follower_id = :user_id"
     where("user_id IN (#{followed_user_ids}) OR user_id = :user_id", 
           user_id: user.id)
+  end
+  
+  def all_comments(eventid)
+	all_comments = Event.find_by_sql("SELECT * FROM event_comment_relationships
+									WHERE event_id = :event_id", route_id: eventid)
   end
   
 end

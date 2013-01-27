@@ -36,13 +36,17 @@ class User < ActiveRecord::Base
   #personal information
   has_one :info, dependent: :destroy
   
-  #comments for route
+  #comments for a route
   has_many :route_comment_relationships, foreign_key: "commenter_id", dependent: :destroy
   has_many :route_comments, through: :route_comment_relationships, source: :route_comment
   
   #attends an event
   has_many :event_attends, foreign_key: "attendee_id", dependent: :destroy
   has_many :attend_events, through: :event_attends, source: :attend_event
+  
+  #comments for an event
+  has_many :event_comment_relationships, foreign_key: "commenter_id", dependent: :destroy
+  has_many :event_comments, through: :event_comment_relationships, source: :event_comment
   
   
   

@@ -1,0 +1,18 @@
+<li>
+	There is <%= @event.commenters.count %> comments for this route <br>
+	<ul class="comments">
+	  <% @allcomments.each do |comment| %>
+		<li>
+			<p>
+				<%= comment.created_at %> comment: <%=comment.text%> <br>
+				<% user = get_user(comment.commenter_id)[0] %>
+				FROM: <%= link_to user["email"], :controller => "users", :action => "show", :id => user["id"] %>		<br>
+				<% if current_user.email == user["email"] %>
+					<%= link_to 'REMOVE COMMENT', {:controller => 'event_comment_relationships',
+					:action => 'destroy', :id => comment.id, :event_id => @event.id }, :confirm => 'Are you sure?', :method=>:delete %>
+				<% end %>
+			</p>		  
+		</li>
+	  <% end %>
+	</ul>	
+</li>

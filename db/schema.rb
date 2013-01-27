@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130126113343) do
+ActiveRecord::Schema.define(:version => 20130127071627) do
 
   create_table "activity_types", :force => true do |t|
     t.string   "title"
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(:version => 20130126113343) do
   add_index "event_attends", ["attend_event_id"], :name => "index_event_attends_on_attend_event_id"
   add_index "event_attends", ["attendee_id", "attend_event_id"], :name => "index_event_attends_on_attendee_id_and_attend_event_id", :unique => true
   add_index "event_attends", ["attendee_id"], :name => "index_event_attends_on_attendee_id"
+
+  create_table "event_comment_relationships", :force => true do |t|
+    t.integer  "commenter_id"
+    t.integer  "event_id"
+    t.string   "text"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "event_comment_relationships", ["commenter_id"], :name => "index_event_comment_relationships_on_commenter_id"
+  add_index "event_comment_relationships", ["event_id"], :name => "index_event_comment_relationships_on_event_id"
 
   create_table "events", :force => true do |t|
     t.integer  "user_id"

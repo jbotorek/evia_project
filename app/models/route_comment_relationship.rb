@@ -19,5 +19,5 @@ class RouteCommentRelationship < ActiveRecord::Base
   validates :commenter_id, presence: true
   validates :route_id, presence: true
   validates :text, presence: true
-  validates :text, length: { maximum: 50 }
+  validates :text, length: { maximum: 250 }
 end

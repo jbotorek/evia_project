@@ -35,6 +35,8 @@ class EventsController < ApplicationController
 	@route = Route.find(@event.route_id)
 	@activity = ActivityType.find(@event.event_type_id)
 	@allattendee = @event.attendees
+	@comment = EventCommentRelationship.new
+	@allcomments = @event.all_comments(@event.id)
   end
   
   def edit

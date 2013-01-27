@@ -25,6 +25,7 @@ Evia::Application.routes.draw do
   resources :want_try_relationships, only: [:create, :destroy]
   resources :route_comment, only: [:create, :destroy]
   resources :route_comment_relationships, only: [:create, :destroy]
+  resources :event_comment_relationships, only: [:create, :destroy]
   resources :infos
   resources :events
   
