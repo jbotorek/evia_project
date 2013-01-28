@@ -1,6 +1,8 @@
-<h1>Personal Info  </h1>
+<% content_for :showcase do %>
+    <h1>Personal Info  </h1>
 
-<%= render 'form' %>
+    <%= render 'form' %>
 
 
-<%= link_to 'Back', current_user %>
+    <%= link_to 'Back', current_user %>
+<% end %>

@@ -1,36 +1,35 @@
-<% provide(:title, @user.email) %>
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-<div>
-    <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.email %>
-      </h1>	
-	  <% if @info==nil %>
-		 <h2> PERSONAL INFO NOT YED PROVIDED </h2>
-	  <% else %>
-	     <h2> PERSONAL INFO </h2>
-		 <h2> name: <%= @info.name %> <%= @info.surname %> </h2>
-		 <h2> address: <%= @info.town %>, <%= @info.street %> </h2>
-	  <% end %>
-	</section>
-</div>
-<div>
-  <%= render 'shared/stats' %>
-</div>
+<p id="notice"><%= notice %></p>
 
-<span>
-<%= render 'follow_form' if signed_in? %>  SLEDUJES?
-</span>
 
-<br><br><br>
-<div>
-  <h3>User's showcase</h3>
-  <%= render 'shared/showcase', collection: @showcase_items %>
-</div>
-
+<% content_for :summary do %>
+    <% provide(:title, @user.email) %>
+    <div class="visit_card summary_part">
+          <h1>
+            <%= @user.email %>
+          </h1>	
+          <% if @info==nil %>
+             <span> PERSONAL INFO NOT YED PROVIDED </span>
+          <% else %>
+             <span> name: <%= @info.name %> <%= @info.surname %> </span>
+             <span> address: <%= @info.town %>, <%= @info.street %> </span>
+          <% end %>
+          
+          <%= gravatar_for @user %>
+    </div>
+    <div class="clear">
+      <%= render 'shared/stats' %>
+    </div>
+    
+   
+    <span>
+    <%= render 'follow_form' if signed_in? %>  SLEDUJES?
+    </span>
+<% end %>
+<% content_for :showcase do %> 
+    <div>
+      <h3>User's showcase</h3>
+      <%= render 'shared/showcase', collection: @showcase_items %>
+    </div>
+<% end %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

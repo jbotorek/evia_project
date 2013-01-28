@@ -1,5 +1,5 @@
 class InfosController < ApplicationController
-	
+	layout "basic"
 	
 	def new
 	    @info = Info.new
