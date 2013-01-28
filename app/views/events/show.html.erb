@@ -1,34 +1,36 @@
 <% provide(:title, @event.title) %>
-<p>
-	<% if current_user.id == @event.user_id %>
-		<%= link_to 'Update event information', edit_event_path(@event.id) %>
-	<% end %>
-</p>
-<h1>
-	TITLE: <%= @event.title %>
-</h1>
-<h2>
-	The event takes place on: <%= @event.time.strftime("%d.%m.%Y") %><br>
-	in <%= @event.time.strftime(" %H:%M") %>
-</h2>
-<h2>
-	DESCRIPTION: <%= @event.description %>
-</h2>
-<h3>
-	The event is designated for: <%= @activity.title %>
-</h3>
-<br>
+<% content_for :showcase do %>
+    <p>
+        <% if current_user.id == @event.user_id %>
+            <%= link_to 'Update event information', edit_event_path(@event.id) %>
+        <% end %>
+    </p>
+    <h1>
+        TITLE: <%= @event.title %>
+    </h1>
+    <h2>
+        The event takes place on: <%= @event.time.strftime("%d.%m.%Y") %><br>
+        in <%= @event.time.strftime(" %H:%M") %>
+    </h2>
+    <h2>
+        DESCRIPTION: <%= @event.description %>
+    </h2>
+    <h3>
+        The event is designated for: <%= @activity.title %>
+    </h3>
+    <br>
 
-<%= render 'attend' %>
+    <%= render 'attend' %>
 
-<div align="center">
-	<%= render 'routes/routedetails' %>
-</div>
+    <div align="center">
+        <%= render 'routes/routedetails' %>
+    </div>
 
-<br><br><br>
-<%= render 'events/event_new_comment' %>
-<br><br>
+    <br><br><br>
+    <%= render 'events/event_new_comment' %>
+    <br><br>
 
-<%= render 'events/event_comments_stream' %>
+    <%= render 'events/event_comments_stream' %>
 
-<%= link_to 'Back', current_user %>
+    <%= link_to 'Back', current_user %>
+<% end %>

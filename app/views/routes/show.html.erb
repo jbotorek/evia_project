@@ -1,18 +1,20 @@
 <% provide(:title, @route.title) %>
-<%= render 'routedetails' %>
-<h3>
-	The route is designated for:<br> 
-	<% @activities.each do |act| %> 
-		<%= act.title %> <br>
-	<% end %>
-</h3>
+<% content_for :showcase do %>
+    <%= render 'routedetails' %>
+    <h3>
+        The route is designated for:<br> 
+        <% @activities.each do |act| %> 
+            <%= act.title %> <br>
+        <% end %>
+    </h3>
 
-<%= render 'want_try' %>
-<%= render 'tried' %>
+    <%= render 'want_try' %>
+    <%= render 'tried' %>
 
-<br><br><br>
+    <br><br><br>
 
-<%= render 'route_new_comment' %>
-<%= render 'route_comments_stream' %>
+    <%= render 'route_new_comment' %>
+    <%= render 'route_comments_stream' %>
 
-<%= link_to 'Back', @user %>
+    <%= link_to 'Back', @user %>
+<% end %>
