@@ -4,6 +4,7 @@ body, div, h1, h2, h3, p,ol, img, header, section, aside, footer, button {
 }
 body{
   background-color: rgb(255,255,153);
+  font-family: sans-serif;
 }
 h1, h2, h3 {
 	font-family: Georgia, Palatino, Palatino Linotype, Times, Times New Roman, sans-serif;
@@ -123,7 +124,7 @@ header#site_head a{
     section{
       padding: 5px 5px 5px 5px;
       margin: 5px 5px 5px 5px;
-      background-color:#FFFFCC;
+      background-color:#FFFFFF;
       border-radius:5px;
       box-shadow: inset 0px 0px 3px rgb(153,102,0);
 	  color:#404040;
@@ -149,6 +150,15 @@ header#site_head a{
         background-color:rgb(204,204,102);
         box-shadow: inset 0px 0px 3px rgb(153,102,0);
         border-radius:5px;
+    }
+    div.summary_part a{
+        color:white;
+        display:block;
+        text-align:center;
+        font-variant:small-caps;
+        font-weight:bold;
+        font-size:150%;
+        text-shadow: 0px 0px 10px rgb(153,102,0);
     }
     div.visit_card{
         background-color:rgb(204,204,102);
@@ -188,8 +198,30 @@ header#site_head a{
         text-align:center;
     }
     div.stats a{
+        font-size:inherit;
+        display:block;
+        z-index:5;
+        width:100%;
+        color:white;
+    }
+    span.stats_half{
         width:45%;
         display:inline-block;
+        height:50px;
+        text-align:center;
+        font-variant:small-caps;
+        font-size: 150%;
+        font-weight:bold;
+        text-shadow: 0px 0px 10px rgb(153,102,0);
+    }
+    span.stats_info{
+        color:white;
+        width:100%;
+        margin-top:-5px;
+        margin-bottom:-5px;
+        display:block;
+        z-index:0;
+        text-align:center;
     }
     div.showcase_item{
         padding-top:5px;
@@ -219,9 +251,9 @@ header#site_head a{
 	div.new_route{
 		margin-left:15px;
 	}	
-		div.new_route_item{
-			margin-top:10px;
-		}
+    div.new_route_item{
+        margin-top:10px;
+    }
 	h1.new_route_header{
 	font-size: 30px;
 	text-align:center;
@@ -236,10 +268,19 @@ header#site_head a{
         box-shadow: inset 0px 0px 3px rgb(153,102,0);
         border-radius:5px;
     }
-    div.field{
+    div.form h1{
         text-align:center;
+    }
+    div.field{
+        width:80%;
+        position:relative;
+        left:10%;
     }
     div.field label{
         float:left;
-        width:250px;
+        width:200px;
+    }
+    div.field textarea,input[type=text],input[type=password]{
+        max-height:125px;
+        width:100%;
     }

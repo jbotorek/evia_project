@@ -7,7 +7,11 @@
     <%= render "layouts/header" %>
     <div id="main_content">
         <section id="summary">
-            <%= yield :summary %>
+            <% if content_for?(:summary) %>
+              <%= yield(:summary) %>
+            <% else %>
+              <%= render "users/visit_card" %>
+            <% end %>
             <%= render "layouts/menu" %>
         </section>
         <section id="showcase">
