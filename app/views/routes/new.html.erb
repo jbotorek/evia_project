@@ -1,8 +1,13 @@
 <% content_for :showcase do %>
 <h1>New route</h1>
 
+  <% flash.each do |key, value| %>										
+    <div class="alert alert-<%= key %>"><%= value %></div>			
+  <% end %>
+  
 <%= render 'form' %>
 
+  
 <%= link_to 'Back', root_path %>
 
 <% end %>
