@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>evia</title>
+    <%= stylesheet_link_tag "basic", :media => "all" %>
+  </head>
+  <body>
+    <%= render "layouts/header" %>
+    <div id="main_content">
+        <section id="summary">
+            <%= yield :summary %>
+            <%= render "layouts/menu" %>
+        </section>
+        <section id="showcase">
+            <%= yield :showcase %>
+        </section>
+        <section id="more">
+            footer
+        </section>
+    </div>
+  </body>
+</html>

@@ -1,4 +1,5 @@
 class RoutesController < ApplicationController
+    layout "basic"
 	before_filter :signed_in_user, only: [:create, :destroy, :show]
 	before_filter :correct_user, only:[ :destroy ]
 	
@@ -9,25 +10,19 @@ class RoutesController < ApplicationController
 	
 	def create
 	  @route = current_user.routes.build(params[:route])
-	  @types = ActivityType.all
-	  activity = params[:type_ids]
-	  if activity.nil? 
-		flash[:notice] = "At least one type of route must be selected!"
-	    render :new
-	  else
-	    if @route.save
-		  activity.each { |act|
+	  if @route.save
+		activity = params[:type_ids]
+			activity.each { |act|
 			activityRelation = RouteActivityRelation.new
 			activityRelation.activity_type_id = act
 			activityRelation.route_id = @route.id
 			activityRelation.save!
-		  }
-	      flash[:success] = "Route created!"
-		  redirect_to current_user
-		  else
-			render :new
-		  end
-		end
+		}
+		flash[:success] = "Route created!"
+		redirect_to current_user
+	  else
+	    render 'new'
+	  end
 	end
 	
 	def destroy
