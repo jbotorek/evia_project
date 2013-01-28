@@ -1,5 +1,13 @@
-<h1>Welcome page</h1>
-<p>WELCOME TO THE eVia </p>
-
-
-<p><%= link_to "Novy uzivatel", new_user_path %></p>
+<% content_for :summary do %>
+<div class="form">
+    <h2>Welcome back!</h2>
+    <%= render "sessions/form" %>
+</div>
+<% end %>
+<% content_for :showcase do %>
+    <%= render "static_pages/welcome" %>
+    <div class="form clear">
+        <h1>Travel with us!</h1>
+        <%= render "users/form" %>
+    </div>
+<% end %>

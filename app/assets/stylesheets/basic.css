@@ -1,5 +1,5 @@
 /* CSS Document */
-body, div, h1, h2, h3, p, ul, ol, li, img, header, section, aside, footer, button {
+body, div, h1, h2, h3, p,ol, img, header, section, aside, footer, button {
 	margin: 0; padding: 0; border: 0; list-style: none;
 }
 body{
@@ -114,7 +114,7 @@ header#site_head a{
 				box-shadow: none;
 		}
 		
-		div#main_content{
+    div#main_content{
         width:960px;
         position:absolute;
         left:50%;
@@ -176,6 +176,9 @@ header#site_head a{
         width: 170px;
         margin-top: 5px;
     }
+    .right{
+        float:right;
+    }
     .clear{
         clear:both;
     }
@@ -212,6 +215,7 @@ header#site_head a{
         display:inline-block;
         text-align:center;
     }
+	
 	div.new_route{
 		margin-left:15px;
 	}	
@@ -225,3 +229,17 @@ header#site_head a{
 	margin-bottom:20px;
 	}
 	
+    div.form{
+        padding-top:5px;
+        padding-bottom:5px;
+        background-color:rgb(204,204,102);
+        box-shadow: inset 0px 0px 3px rgb(153,102,0);
+        border-radius:5px;
+    }
+    div.field{
+        text-align:center;
+    }
+    div.field label{
+        float:left;
+        width:250px;
+    }
