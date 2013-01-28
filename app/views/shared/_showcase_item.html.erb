@@ -1,48 +1,11 @@
 <% @showcase_items.each do |item| %>
   <div class="showcase_item">
       <% if item.instance_of?(Route)%>
-          <% temp_route = item %>
-            <div class="showcase_item_body">
-                <div class="user">
-                  <%= link_to item.user.email, item.user%>
-                </div>
-                <% text = "ROUTE: " + item.title+ " " + item.description %>
-                <%= link_to text, temp_route %>
-                New route created:
-                <span>Posted <%= time_ago_in_words(item.created_at) %> ago.</span>
-                <% if current_user?(item.user) %>
-                    <%= link_to "delete", item, method: :delete,
-                                                     data: { confirm: "You sure?" },
-                                                     title: item.title %>
-                <% end %>
-            </div>
-            <%= link_to gravatar_for(temp_route.user), temp_route.user %>
-            <div class='clear'>
-                <span class="half_horizontally"><%= temp_route.wanters.count %> persons WANT TO TRY</span>
-                <span class="half_horizontally"><%= temp_route.triers.count %> persons have already TRIED the route</span>
-            </div>
+          <% @temp_route = item %>
+		  <%= render 'shared/route_showcase_item' %>
       <% else %>
-        <% temp_event = item %>
-        <%= link_to gravatar_for(temp_event.user), temp_event.user %>
-        <div class="user">
-          <%= link_to temp_event.user.email, temp_event.user%>
-        </div>
-        <div class="showcase_item_body">created a new event: 
-            <% text = temp_event.title + " on: "  + temp_event.time.strftime("%d.%m.%Y")%> 
-            <%= link_to text, temp_event%>
-        </div>
-        <div class='clear'>
-            <div>
-                Posted <%= time_ago_in_words(item.created_at) %> ago.
-            </div>
-            <div>
-                <% if current_user?(temp_event.user) %>
-                        <%= link_to "delete", item, method: :delete,
-                                                     data: { confirm: "You sure?" },
-                                                     title: item.title %>
-                <% end %>
-            </div>
-        </div>
+        <% @temp_event = item %>
+        <%= render 'shared/event_showcase_item' %>
       <% end %>
   </div>
 <% end %>
