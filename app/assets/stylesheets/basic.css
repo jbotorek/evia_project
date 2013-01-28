@@ -123,9 +123,10 @@ header#site_head a{
     section{
       padding: 5px 5px 5px 5px;
       margin: 5px 5px 5px 5px;
-      background-color:white;
+      background-color:#FFFFCC;
       border-radius:5px;
       box-shadow: inset 0px 0px 3px rgb(153,102,0);
+	  color:#404040;
     }
     section#summary{
       width: 260px;
@@ -211,3 +212,16 @@ header#site_head a{
         display:inline-block;
         text-align:center;
     }
+	div.new_route{
+		margin-left:15px;
+	}	
+		div.new_route_item{
+			margin-top:10px;
+		}
+	h1.new_route_header{
+	font-size: 30px;
+	text-align:center;
+	margin-top:10
+	margin-bottom:20px;
+	}
+	
