@@ -2,11 +2,11 @@
   <%= render 'shared/error_messages', object: f.object %>
 
   <div class="field">
-    <%= f.label "email" %><br />
+    <%= f.label "Enter your email address:" %>
     <%= f.text_field :email %><br />
-	<%= f.label "heslo" %><br />
+	<%= f.label "Choose carefully your password:" %>
     <%= f.password_field :password %><br />
-	<%= f.label :password_confirmation, "Confirmation" %><br />
+	<%= f.label :password_confirmation, "Please, repeat your password:" %>
 	<%= f.password_field :password_confirmation %><br />
   </div>
   <div class="actions">
