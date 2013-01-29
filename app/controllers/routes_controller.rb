@@ -31,10 +31,19 @@ class RoutesController < ApplicationController
 	  end
 	end
 	
+	#if the route is used in some map - the "owner" of the event becomes the owner of the route instead the original user 
 	def destroy
-	  @route.destroy
-	  flash[:success] = "Route was deleted!"
-	  redirect_to current_user
+	  event = Event.find_by_route_id(@route.id)
+	  unless event.nil?
+	    @route.update_attributes(:user_id => event.user_id)	
+		user = User.find(event.user_id)
+		flash[:success] = "Route was handed to another user (it is still used in an event): #{user.email}!"
+		redirect_to current_user
+	  else
+		@route.destroy
+		flash[:success] = "Route was deleted!"
+		redirect_to current_user
+	  end
 	end
 	
 	def show
