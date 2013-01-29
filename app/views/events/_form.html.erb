@@ -8,6 +8,8 @@
     <%= e.text_area :description %><br />
 	<%= e.label "date          |" %> Provide the date and time in a format (dd.mm.yyyy hh:mm) <br />
 	<%= e.text_field :time %><br />
+				<%= e.label "time" %> <br />
+				<%= e.time_select :hour %><br />
 	<%= e.label "Select route for your event:" %><br />	
 	<%= e.collection_select(:route_id, @routes, :id, :title) %><br />
 	<%= e.label "Select type of your event:" %><br />

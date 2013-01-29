@@ -11,10 +11,11 @@
 #  event_type_id :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  hour          :time
 #
 
 class Event < ActiveRecord::Base
-  attr_accessible :description, :event_type_id, :route_id, :time, :title, :user_id, :id
+  attr_accessible :description, :event_type_id, :route_id, :time, :title, :user_id, :id, :hour
   
   #User that created the event
   belongs_to :user 

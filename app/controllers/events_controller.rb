@@ -43,6 +43,7 @@ class EventsController < ApplicationController
 	@event = Event.find(params[:id])
 	@types = ActivityType.all
 	@routes = Route.all
+	@user = current_user
   end
 
   def update

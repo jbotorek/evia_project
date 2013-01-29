@@ -11,6 +11,7 @@
 #  event_type_id :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  hour          :time
 #
 
 require 'spec_helper'

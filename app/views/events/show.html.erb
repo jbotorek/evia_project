@@ -10,7 +10,7 @@
     </h1>
     <h2>
         The event takes place on: <%= @event.time.strftime("%d.%m.%Y") %><br>
-        in <%= @event.time.strftime(" %H:%M") %>
+        in <%= @event.hour.strftime(" %H:%M") %>
     </h2>
     <h2>
         DESCRIPTION: <%= @event.description %>

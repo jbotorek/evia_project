@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: event_comment_relationships
+#
+#  id           :integer          not null, primary key
+#  commenter_id :integer
+#  event_id     :integer
+#  text         :string(255)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 class EventCommentRelationship < ActiveRecord::Base
   attr_accessible :commenter_id, :event_id, :text
     

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130127071627) do
+ActiveRecord::Schema.define(:version => 20130129121603) do
 
   create_table "activity_types", :force => true do |t|
     t.string   "title"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20130127071627) do
     t.integer  "event_type_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.time     "hour"
   end
 
   add_index "events", ["route_id"], :name => "index_events_on_route_id"
