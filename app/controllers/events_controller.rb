@@ -36,6 +36,7 @@ class EventsController < ApplicationController
 	@activity = ActivityType.find(@event.event_type_id)
 	@comment = EventCommentRelationship.new
 	@allcomments = @event.all_comments(@event.id)
+	@user = current_user
   end
   
   def edit
