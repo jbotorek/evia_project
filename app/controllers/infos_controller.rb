@@ -16,7 +16,8 @@ class InfosController < ApplicationController
 	  end
 	end
 	
-	def edit	
+	def edit
+        @user = User.find(params[:id])
 		@info = Info.find_by_user_id(current_user.id)
 	end
 	

@@ -1,11 +1,12 @@
 class EventsController < ApplicationController
   layout "basic"
   before_filter :signed_in_user
-
   def new
     @event = Event.new
 	@types = ActivityType.all
 	@routes = Route.all
+    @user = current_user
+    @info = Info.find_by_user_id(@user.id)
   end
 
  
@@ -37,6 +38,7 @@ class EventsController < ApplicationController
 	@comment = EventCommentRelationship.new
 	@allcomments = @event.all_comments(@event.id)
 	@user = current_user
+    @info = Info.find_by_user_id(@user.id)
   end
   
   def edit
@@ -44,6 +46,7 @@ class EventsController < ApplicationController
 	@types = ActivityType.all
 	@routes = Route.all
 	@user = current_user
+    @info = Info.find_by_user_id(@user.id)
   end
 
   def update

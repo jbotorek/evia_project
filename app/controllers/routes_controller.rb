@@ -6,6 +6,8 @@ class RoutesController < ApplicationController
 	def new
 	  @route = current_user.routes.build
 	  @types = ActivityType.all
+      @user = current_user
+      @info = Info.find_by_user_id(@user.id)
 	end
 	
 	def create
@@ -49,6 +51,7 @@ class RoutesController < ApplicationController
 	def show
 	  @route = Route.find(params[:id])
 	  @user = current_user
+      @info = Info.find_by_user_id(@user.id)
 	  @activities = @route.activity_types
 	  @comment = RouteCommentRelationship.new
 	  @allcomments = @route.all_comments(@route.id)
