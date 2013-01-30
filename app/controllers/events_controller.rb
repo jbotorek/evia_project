@@ -11,6 +11,7 @@ class EventsController < ApplicationController
 
  
   def create
+	@user = current_user
 	@event = current_user.events.build(params[:event])
 	@event.user_id = current_user.id
 	if @event.save
@@ -50,6 +51,7 @@ class EventsController < ApplicationController
   end
 
   def update
+	@user = current_user
 	if Event.find(params[:id]).update_attributes(params[:event])
 	  flash[:success] = "Event specifications updated"
 	  redirect_to current_user

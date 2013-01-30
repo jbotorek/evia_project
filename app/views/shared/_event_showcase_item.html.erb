@@ -10,10 +10,10 @@
 	  <%= link_to @temp_event.user.email, @temp_event.user%>
 	</div>
 	<div class="showcase_body">
-        <%= link_to gravatar_for(@temp_event.user), @temp_event.user %>created a new event:
+        <%= link_to gravatar_for(@temp_event.user), @temp_event.user %>
+		New <b>EVENT</b> created:
 		<% text = @temp_event.title + " on: "  + @temp_event.time.strftime("%d.%m.%Y")%> 
 		<%= link_to text, @temp_event%>
-		will attend
 	</div>
 	<div class="showcase_props">
 		 <%= @temp_event.attendees.count %> attends

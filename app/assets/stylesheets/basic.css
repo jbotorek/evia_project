@@ -316,15 +316,14 @@ header#site_head a{
         width:100%;
     }
 
-	/* Datepicker - rectangle in top of the page
-----------------------------------*/
+	/* Datepicker - rectangle in top of the page ------------*/
 #ui-datepicker-div{ display: none; position: absolute; left: -99999999px; }
 
+/* Buttons ------------*/
 div.actions{
 	width: 35%;
     margin: 15px auto;
 }
-
 .action_button{
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -353,4 +352,18 @@ div.actions{
 }.action_button:active {
 	position:relative;
 	top:1px;
+}
+
+/* Flash and notice messages ------------*/
+div.notice{
+	text-align:center;
+	color: #f00;
+	margin: 0 0 18px 0;
+}
+
+div.errors{
+	color: #F43636;
+	font-size:12px;
+	font-weight:bold;
+	margin:25px 0px 25px 15px;
 }

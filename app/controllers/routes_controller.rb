@@ -11,6 +11,7 @@ class RoutesController < ApplicationController
 	end
 	
 	def create
+	  @user = current_user
 	  @route = current_user.routes.build(params[:route])
 	  @types = ActivityType.all
 	  activity = params[:type_ids]

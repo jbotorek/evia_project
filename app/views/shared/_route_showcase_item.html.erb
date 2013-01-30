@@ -11,7 +11,8 @@
     </div>
     <div class="showcase_body">
         <%= link_to gravatar_for(@temp_route.user), @temp_route.user %>
-        <% text = "ROUTE: " + @temp_route.title+ " " + @temp_route.description %>
+        New <b>ROUTE</b> created:
+		<% text = @temp_route.title+ " " + @temp_route.description %>
         <%= link_to text, @temp_route %>
     </div>
     <div class="showcase_props">
