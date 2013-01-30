@@ -16,6 +16,6 @@
 	<%= e.collection_select(:event_type_id, @types, :id, :title)%><br />
   </div>
   <div class="actions">
-    <%= e.submit %>
+    <%= e.submit "Create the event", :class => 'action_button'%>
   </div>
 <% end %>

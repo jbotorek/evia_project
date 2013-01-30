@@ -319,3 +319,38 @@ header#site_head a{
 	/* Datepicker - rectangle in top of the page
 ----------------------------------*/
 #ui-datepicker-div{ display: none; position: absolute; left: -99999999px; }
+
+div.actions{
+	width: 35%;
+    margin: 15px auto;
+}
+
+.action_button{
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #c7c5c7) );
+	background:-moz-linear-gradient( center top, #f9f9f9 5%, #c7c5c7 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#c7c5c7');
+	background-color:#f9f9f9;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:2px solid #dcdcdc;
+	display:inline-block;
+	color:#1f1d1f;
+	font-family:Georgia;
+	font-size:14px;
+	font-weight:bold;
+	padding:6px 12px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #faf2fa;
+}.action_button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c7c5c7), color-stop(1, #f9f9f9) );
+	background:-moz-linear-gradient( center top, #c7c5c7 5%, #f9f9f9 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c7c5c7', endColorstr='#f9f9f9');
+	background-color:#c7c5c7;
+}.action_button:active {
+	position:relative;
+	top:1px;
+}

@@ -2,6 +2,7 @@ class InfosController < ApplicationController
 	layout "basic"
 	
 	def new
+		@user = current_user
 	    @info = Info.new
 	end
 	
