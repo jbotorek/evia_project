@@ -1,16 +1,16 @@
 ﻿<% content_for :showcase do %>
 <div class="form">
     <h1>New route</h1> 
-    <div id="map">
-        <%= form_tag({:action => :loadCoords},:method=>:get, :remote=>true,"data-type" => :json,:id=>'getCoords') do %>
+    <div id="map_form">
+        <%= form_tag({},:method=>:get, :remote=>true,"data-type" => :json,:id=>'getCoords') do %>
               <%= text_field_tag "query", "adresa" %>
               <%= submit_tag "Find" %>
         <% end %>
         <div id="control"><a href="#">zapnout</a></div>
-        <div id="points"> </div>
+        <div id="points" style="background-color:red;"> ahoj</div>
         <div id="m" style="height:500px">mapa</div>
+        <a href="javascript:export('map')">exportovat mapu</a>
     </div>
-    <%= link_to "hej", :controller => :routes, :action => :loadCoords %>
     <%= render 'form' %>
 </div>
  <%= javascript_include_tag 'http://api4.mapy.cz/loader.js' %>
@@ -38,7 +38,7 @@ $(document).ready(function(){
     function geokoduj(e, elm) {  /* Voláno při odeslání */
         JAK.Events.cancelDef(e); /* Zamezit odeslání formuláře */
         var query = JAK.gel("query").value;
-        new SMap.Geocoder(query, odpoved, {count:1});
+        new SMap.Geocoder(query, odpoved, {});
     }
 
     function odpoved(geocoder) { /* Odpověď */
@@ -49,17 +49,24 @@ $(document).ready(function(){
         
         var vysledky = geocoder.getResults()[0].results;
         var data;
-        var item = vysledky.shift();
-        var point = [];
-        point[0] = item.coords;
-        point[4] = item.label;
-        points.push(point);
-        renderMap();
+        while(vysledky.length){
+            var item = vysledky.shift();
+            $('#points').append("<a href='javascript:selectOneAndAddToMap("+item.coords.x+","+item.coords.y+",\""+item.label+"\");'>"+item.label+"</a><br />");
+        }
     }
 
     var form = JAK.gel("getCoords");
     JAK.Events.addListener(form, "submit", geokoduj); /* Při odeslání formuláře pustit geokódování */
 });
+function selectOneAndAddToMap(coordX,coordY,label){
+    var point = [];
+    point[0] = SMap.Coords.fromPP(coordX,coordY);
+    point[4] = label;
+    points.push(point);
+    $('#points').html('');
+    alert(points[0][0]);
+    renderMap();
+}
 
 $('#control a').click(function(){
         if(clickOn==false){

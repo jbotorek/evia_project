@@ -96,11 +96,6 @@ class RoutesController < ApplicationController
 			redirect_to current_user
 		end
 	end
-	
-    def loadCoords()
-        geoloc = Geokit::Geocoders::GoogleGeocoder.geocode(params[:address])
-        respond_with ActiveSupport::JSON.encode({ :lng=> geoloc.lng,:lat=>geoloc.lat })
-    end
     
 	private
 	def correct_user

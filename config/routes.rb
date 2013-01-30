@@ -1,5 +1,4 @@
 Evia::Application.routes.draw do
-  match '/routes/loadCoords', :controller => 'routes', :action => 'loadCoords'
   
   resources :users do
     member do
@@ -9,7 +8,7 @@ Evia::Application.routes.draw do
   
   resources :routes do
     member do
-	  get 'wanters', 'unwant', 'triers', 'untry', 'loadCoords'
+	  get 'wanters', 'unwant', 'triers', 'untry'
 	end
   end
   
