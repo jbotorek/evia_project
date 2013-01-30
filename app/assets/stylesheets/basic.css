@@ -315,3 +315,7 @@ header#site_head a{
         max-height:125px;
         width:100%;
     }
+
+	/* Datepicker - rectangle in top of the page
+----------------------------------*/
+#ui-datepicker-div{ display: none; position: absolute; left: -99999999px; }

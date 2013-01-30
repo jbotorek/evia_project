@@ -79,6 +79,7 @@ class UsersController < ApplicationController
   end
 	
   def allwanters
+	@user = current_user
 	@route = Route.find(params[:route_id])
 	@title = "Wanters"
 	@users = @route.wanters
@@ -86,6 +87,7 @@ class UsersController < ApplicationController
   end
   
   def alltriers
+	@user = current_user
 	@route = Route.find(params[:route_id])
 	@title = "Triers"
 	@users = @route.triers
