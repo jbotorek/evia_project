@@ -1,5 +1,6 @@
 class RoutesController < ApplicationController
     layout "basic"
+    respond_to :html, :json
 	before_filter :signed_in_user, only: [:create, :destroy, :show]
 	before_filter :correct_user, only:[ :destroy ]
 	
@@ -96,6 +97,11 @@ class RoutesController < ApplicationController
 		end
 	end
 	
+    def loadCoords()
+        geoloc = Geokit::Geocoders::GoogleGeocoder.geocode(params[:address])
+        respond_with ActiveSupport::JSON.encode({ :lng=> geoloc.lng,:lat=>geoloc.lat })
+    end
+    
 	private
 	def correct_user
 		@route = current_user.routes.find_by_id(params[:id])							

@@ -1,7 +1,135 @@
 <% content_for :showcase do %>
 <div class="form">
     <h1>New route</h1> 
-
+    <div id="map">
+        <%= form_tag({:action => :loadCoords},:method=>:get, :remote=>true,"data-type" => :json,:class=>'getCoords') do %>
+              <%= text_field_tag "address", "adresa" %>
+              <%= submit_tag "Find" %>
+        <% end %>
+        <div id="control"><a href="#">zapnout</a></div>
+        <div id="m" style="height:340px">mapa</div>
+    </div>
+    <%= link_to "hej", :controller => :routes, :action => :loadCoords %>
     <%= render 'form' %>
 </div>
+ <%= javascript_include_tag 'http://api4.mapy.cz/loader.js' %>
+ <script>
+    Loader.load();
+    
+var m;
+var layer;
+var trasaLayer;
+var mapClick;
+var clickOn=false;
+$(document).ready(function(){
+    var center = SMap.Coords.fromWGS84(15.335764, 49.742466);
+    m = new SMap(JAK.gel("m"), center, 0);
+    m.addDefaultLayer(SMap.DEF_TURIST).enable();
+    m.addDefaultControls(); 
+    layer = new SMap.Layer.Marker();
+    m.addLayer(layer);
+    layer.enable();
+    trasaLayer = new SMap.Layer.Geometry();
+    m.addLayer(trasaLayer).enable();
+    var mouse = new SMap.Control.Mouse(SMap.MOUSE_PAN | SMap.MOUSE_WHEEL | SMap.MOUSE_ZOOM);
+    m.addControl(mouse);
+    
+$('.getCoords').bind('ajax:beforeSend',function(){
+            layer.removeAll();
+            trasaLayer.removeAll();
+            alert("sending");
+            })
+        .bind('ajax:success', function(evt, data) {
+                var point = [];
+                point[0] = SMap.Coords.fromWGS84(data.lng, data.lat);
+                points.push(point);
+                renderMap();
+            })
+        .bind('ajax:error',function(evt,data){
+            alert("error");
+        });
+    $('#control a').click(function(){
+        if(clickOn==false){
+            turnClickOn();
+            clickOn = true;
+            $(this).html("vypnout");
+        }else{
+            clickOn = false;
+            turnClickOff();
+            $(this).html("zapnout");
+        }
+    });
+});
+function turnClickOn(){
+    mapClick = m.getSignals().addListener(window, "map-click", click);
+}
+
+function turnClickOff(){
+    m.getSignals().removeListener(mapClick);
+}
+function click(e, elm) { 
+    alert(e.type);
+    var coords = SMap.Coords.fromEvent(e.data.event, m);
+    var point = [];
+    point[0]=coords;
+    points.push(point);
+    renderMap();
+}
+var points=[];
+function addPoints(){
+        $('#points').html('');
+        layer.removeAll();
+        for(var i=0;i<points.length;i++){
+            var marker = new SMap.Marker(points[i][0],"marker"+i,{});
+            layer.addMarker(marker);
+            if(points.length == 1){
+                m.setCenter(points[0][0]);
+            }
+            var card = new SMap.Card();
+            card.getHeader().innerHTML = "<strong>Nadpis</strong>";
+            card.getBody().innerHTML = "<a href=\"javascript:removePoint('"+i+"')\">odebrat</a>!";
+            marker.decorate(SMap.Marker.Feature.Card,card);
+            points[i][1]=marker;
+            points[i][2]=card;
+        }
+        layer.redraw();
+}
+function removePoint(offset){
+    m.removeCard();
+    points.splice(offset,1);
+    renderMap();
+}
+function getPointsCoords(){
+    var coords=[];
+    for(var i=0;i<points.length;i++){
+        coords.push(points[i][0]);
+    }
+    return coords;
+}
+
+function renderMap(){
+    $(document).ready(function(){
+        trasaLayer.removeAll();
+        addPoints();
+        if(points.length>1){
+            var route = new SMap.Route(getPointsCoords(), addToMap, {criterion:"bike1"});
+        }
+        /*var options = {};
+        var marker = new SMap.Marker(center, "myMarker", options);
+        layer.addMarker(marker);
+        var point = SMap.Coords.fromWGS84(16.9654061,49.0);
+        var anotherMarker  = new SMap.Marker(point, "another", options);
+        layer.addMarker(anotherMarker);
+        route = new SMap.Route([center,point], addToMap, {criterion:"bike1"});*/
+    });
+}
+var addToMap = function(route){
+    var coords = route.getResults().geometry;
+    var cz = m.computeCenterZoom(coords);
+    m.setCenterZoom(cz[0], cz[1]);
+    var g = new SMap.Geometry(SMap.GEOMETRY_POLYLINE, null, coords);
+    trasaLayer.addGeometry(g);
+}
+
+</script>
 <% end %>
