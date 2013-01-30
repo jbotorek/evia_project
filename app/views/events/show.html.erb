@@ -1,36 +1,33 @@
 <% provide(:title, @event.title) %>
 <% content_for :showcase do %>
-    <p>
+    <div class="controls">
         <% if current_user.id == @event.user_id %>
             <%= link_to 'Update event information', edit_event_path(@event.id) %>
         <% end %>
-    </p>
-    <h1>
-        TITLE: <%= @event.title %>
-    </h1>
-    <h2>
-        The event takes place on: <%= @event.time.strftime("%d.%m.%Y") %><br>
-        in <%= @event.hour.strftime(" %H:%M") %>
-    </h2>
-    <h2>
-        DESCRIPTION: <%= @event.description %>
-    </h2>
-    <h3>
-        The event is designated for: <%= @activity.title %>
-    </h3>
-    <br>
-
-    <%= render 'attend' %>
-
+    </div>
+    <div class="detail_title">
+        <span><%= @event.title %></span><%= render 'attend' %>
+        <div class='clear'> </div>
+    </div>
+    <div class="detail_field">
+        <span class="detail_head">Start of event:</span> <%= @event.time.strftime("%d.%m.%Y") %>
+        at <%= @event.hour.strftime(" %H:%M") %>
+    </div>
+    <div class="detail_field">
+        <span class="detail_head">Description:</span> <%= @event.description %>
+    </div>
+    <div class="detail_field">
+        <span class="detail_head">Designated for:</span>
+        <%= @activity.title %>
+    </div>
     <div align="center">
         <%= render 'routes/routedetails' %>
     </div>
-
-    <br><br><br>
-    <%= render 'events/event_new_comment' %>
-    <br><br>
-
-    <%= render 'events/event_comments_stream' %>
-
+    <div class="comment form">
+        <%= render 'events/event_new_comment' %>
+    </div>
+    <div class="comment_stream">
+        <%= render 'events/event_comments_stream' %>
+    </div>
     <%= link_to 'Back', current_user %>
 <% end %>

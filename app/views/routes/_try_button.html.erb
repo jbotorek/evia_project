@@ -1,0 +1,10 @@
+<% if current_user.tried?(@route) %>
+    <%= link_to "Reset my info with this route", triers_route_path(:route_id => @route.id) %>
+<% else %>
+    <%if !current_user.want_try?(@route) %>
+        <%= link_to "Want to try", wanters_route_path(:route_id => @route.id)  %>
+    <% else %>
+        <%= link_to "Already tried route", triers_route_path(:route_id => @route.id)  %>
+        <%= link_to "Don't want to try it anymore", unwant_route_path(:route_id => @route.id) %>
+    <% end %>
+<% end %>

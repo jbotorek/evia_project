@@ -1,12 +1,10 @@
-<h1>
-	TITLE: <%= @route.title %>
-</h1>
-<h2>Here is a map of the route</h2>
-<p align = center>
-	<%= @route.map %>
-</p>
-
-<h2>
-	DESCRIPTION: <%= @route.description %>
-</h2>
-<br>
+<div class="detail_title">
+	<span><%= @route.title %></span><%= render 'routes/try_button' %>
+    <div class='clear'> </div>
+</div>
+<div id="map" class="detail_field">
+    <span class="detail_head">Here is a map of the route:</span>@route.map
+</div>
+<div class="detail_field">
+	<span class="detail_head">Description:</span> <%= @route.description %>
+</div>

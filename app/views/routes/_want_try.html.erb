@@ -1,1 +1,1 @@
-<li>	<% if !current_user.want_try?(@route) %>		<%= link_to "Want to try", wanters_route_path(:route_id => @route.id)  %>		<% else %>		You have already WANTED TO TRY the route <br>		<%= link_to "DO NOT WANT TO TRY IT ANYMORE", unwant_route_path(:route_id => @route.id) %>	<% end %>	<b><%= @route.wanters.count %></b> persons WANT TO TRY 	<br>	<div><%= link_to "See all WANTERS", allwanters_path(:route_id => @route.id) %> </div></li>
+<div><%= link_to @route.wanters.count, allwanters_path(:route_id => @route.id) %> WANT TO TRY</div>

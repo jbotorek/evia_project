@@ -1,20 +1,22 @@
 <% provide(:title, @route.title) %>
 <% content_for :showcase do %>
     <%= render 'routedetails' %>
-    <h3>
-        The route is designated for:<br> 
+    <div class="detail_field">
+        <span class="detail_head">The route is designated for:</span> 
         <% @activities.each do |act| %> 
             <%= act.title %> <br>
         <% end %>
-    </h3>
+    </div>
 
-    <%= render 'want_try' %>
-    <%= render 'tried' %>
-
-    <br><br><br>
-
-    <%= render 'route_new_comment' %>
-    <%= render 'route_comments_stream' %>
-
+    <div class="detail_field">
+        <span class="half_horizontally"><%= render 'want_try' %></span>
+        <span class="half_horizontally"><%= render 'tried' %></span>
+    </div>
+    <div class="form">
+        <%= render 'route_new_comment' %>
+    </div>
+    <div class="comment_stream">
+        <%= render 'route_comments_stream' %>
+    </div>
     <%= link_to 'Back', @user %>
 <% end %>
