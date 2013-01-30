@@ -13,8 +13,8 @@
         <fieldset>
             <legend>Choose route's type</legend>
               <% @types.each do |type| %>
-                    <%= check_box_tag 'type_ids[]', type.id -%>
-                    <%= h type.title -%><br />
+                    <%= check_box_tag 'type_ids[]', type.id %>
+                    <%= h type.title %><br />
               <% end %>
         </fieldset>
     </div>

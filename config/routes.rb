@@ -7,7 +7,7 @@ Evia::Application.routes.draw do
   
   resources :routes do
     member do
-	  get 'wanters', 'unwant', 'triers'
+	  get 'wanters', 'unwant', 'triers', 'untry'
 	end
   end
   

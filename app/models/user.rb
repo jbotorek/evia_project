@@ -104,6 +104,10 @@ class User < ActiveRecord::Base
 	tried_relationships.find_by_tried_route_id(route.id)
   end
   
+  def not_tried!(route)
+	tried_relationships.find_by_tried_route_id(route).destroy 
+  end
+  
   def attend?(event)
 	event_attends.find_by_attend_event_id(event.id)
   end

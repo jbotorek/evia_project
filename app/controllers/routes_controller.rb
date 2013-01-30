@@ -72,9 +72,15 @@ class RoutesController < ApplicationController
 	end
 	
 	def unwant		
-		@route = Route.find(params[:route_id])
+		@route = Route.find(params[:id])
 		current_user.not_want_try!(@route.id)
 		redirect_to @route
+	end
+	
+	def untry	
+		@route = Route.find(params[:id])
+		current_user.not_tried!(@route.id)
+		unwant
 	end
 	
 	def triers
