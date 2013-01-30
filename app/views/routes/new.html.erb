@@ -1,13 +1,14 @@
-<% content_for :showcase do %>
+﻿<% content_for :showcase do %>
 <div class="form">
     <h1>New route</h1> 
     <div id="map">
-        <%= form_tag({:action => :loadCoords},:method=>:get, :remote=>true,"data-type" => :json,:class=>'getCoords') do %>
-              <%= text_field_tag "address", "adresa" %>
+        <%= form_tag({:action => :loadCoords},:method=>:get, :remote=>true,"data-type" => :json,:id=>'getCoords') do %>
+              <%= text_field_tag "query", "adresa" %>
               <%= submit_tag "Find" %>
         <% end %>
         <div id="control"><a href="#">zapnout</a></div>
-        <div id="m" style="height:340px">mapa</div>
+        <div id="points"> </div>
+        <div id="m" style="height:500px">mapa</div>
     </div>
     <%= link_to "hej", :controller => :routes, :action => :loadCoords %>
     <%= render 'form' %>
@@ -21,6 +22,7 @@ var layer;
 var trasaLayer;
 var mapClick;
 var clickOn=false;
+
 $(document).ready(function(){
     var center = SMap.Coords.fromWGS84(15.335764, 49.742466);
     m = new SMap(JAK.gel("m"), center, 0);
@@ -33,22 +35,33 @@ $(document).ready(function(){
     m.addLayer(trasaLayer).enable();
     var mouse = new SMap.Control.Mouse(SMap.MOUSE_PAN | SMap.MOUSE_WHEEL | SMap.MOUSE_ZOOM);
     m.addControl(mouse);
-    
-$('.getCoords').bind('ajax:beforeSend',function(){
-            layer.removeAll();
-            trasaLayer.removeAll();
-            alert("sending");
-            })
-        .bind('ajax:success', function(evt, data) {
-                var point = [];
-                point[0] = SMap.Coords.fromWGS84(data.lng, data.lat);
-                points.push(point);
-                renderMap();
-            })
-        .bind('ajax:error',function(evt,data){
-            alert("error");
-        });
-    $('#control a').click(function(){
+    function geokoduj(e, elm) {  /* Voláno při odeslání */
+        JAK.Events.cancelDef(e); /* Zamezit odeslání formuláře */
+        var query = JAK.gel("query").value;
+        new SMap.Geocoder(query, odpoved, {count:1});
+    }
+
+    function odpoved(geocoder) { /* Odpověď */
+        if (!geocoder.getResults().length) {
+            alert("Tohle neznáme.");
+            return;
+        }
+        
+        var vysledky = geocoder.getResults()[0].results;
+        var data;
+        var item = vysledky.shift();
+        var point = [];
+        point[0] = item.coords;
+        point[4] = item.label;
+        points.push(point);
+        renderMap();
+    }
+
+    var form = JAK.gel("getCoords");
+    JAK.Events.addListener(form, "submit", geokoduj); /* Při odeslání formuláře pustit geokódování */
+});
+
+$('#control a').click(function(){
         if(clickOn==false){
             turnClickOn();
             clickOn = true;
@@ -59,7 +72,7 @@ $('.getCoords').bind('ajax:beforeSend',function(){
             $(this).html("zapnout");
         }
     });
-});
+
 function turnClickOn(){
     mapClick = m.getSignals().addListener(window, "map-click", click);
 }
@@ -73,7 +86,19 @@ function click(e, elm) {
     var point = [];
     point[0]=coords;
     points.push(point);
+    var last = (points.length>0)?(points.length-1):0;
+    new SMap.Geocoder.Reverse(coords, getLabel, {count:1,offset:last});
+    $('#control a').click();
+}
+function getLabel(geocoder) {
+    if (geocoder.getResults()==undefined) {
+        alert("Tohle neznáme.");
+        return;
+    }
+    points[geocoder._options.offset][4]=geocoder.getResults().label;
+    
     renderMap();
+    
 }
 var points=[];
 function addPoints(){
@@ -86,7 +111,7 @@ function addPoints(){
                 m.setCenter(points[0][0]);
             }
             var card = new SMap.Card();
-            card.getHeader().innerHTML = "<strong>Nadpis</strong>";
+            card.getHeader().innerHTML = "<strong>"+points[i][4]+"</strong>";
             card.getBody().innerHTML = "<a href=\"javascript:removePoint('"+i+"')\">odebrat</a>!";
             marker.decorate(SMap.Marker.Feature.Card,card);
             points[i][1]=marker;
