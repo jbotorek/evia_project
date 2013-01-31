@@ -456,5 +456,23 @@ a.gravatar_set:hover{
 	top:1px;
 }
 div.allusers{
-	margin:15px 0px 15px 150px;
+	margin:15px 0px 15px 100px;
+}
+table.allusers td{
+	padding-right:100px;
+}
+table.allusers tr:hover{
+	background-color:white;
+	border-radius:5px;
+}
+
+div.index_users_item a:hover{
+	background-color:white;
+	border-radius:5px;
+}
+div.show_follow_gravatar{
+	margin: 10px 0px 20px 40px;
+}
+div.show_follow_email{
+	margin: -60px 0px 40px 130px;
 }
