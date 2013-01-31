@@ -68,7 +68,7 @@ function routeToGpx(){
         p = points[i];
         wgspoint = p[0].toWGS84(0);
         alert(wgspoint);
-        gpx = gpx + '<trkpt lat="'+wgspoint[1]+'" lon="'+wgspoint[0]+'"></trkpt>'
+        gpx = gpx + '<trkpt lat="'+wgspoint[1]+'" lon="'+wgspoint[0]+'"><name>'+p[4]+'</name></trkpt>'
     }
     gpx = gpx + '</trkseg>';
     gpx = gpx + '</trk></gpx>';
