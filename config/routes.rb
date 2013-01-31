@@ -2,7 +2,7 @@ Evia::Application.routes.draw do
   
   resources :users do
     member do
-	  get :following, :followers					#paths will look like: user/1/following					user/3/followers
+	  get :following, :followers, :attendees					#paths will look like: user/1/following					user/3/followers
 	end
   end
   

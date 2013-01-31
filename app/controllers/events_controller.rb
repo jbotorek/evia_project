@@ -60,17 +60,17 @@ class EventsController < ApplicationController
 	end
   end
   
-    def attend
-		@event = Event.find(params[:event_id])
-		attend = EventAttend.new	
-		attend.attendee_id = current_user.id
-		attend.attend_event_id = @event.id
-		if attend.save
-			flash[:succes] = "You want to attend the event"
-			redirect_to @event
-		else
-			redirect_to current_user
-		end
+  def attend
+	@event = Event.find(params[:event_id])
+	attend = EventAttend.new	
+	attend.attendee_id = current_user.id
+	attend.attend_event_id = @event.id
+	if attend.save
+		flash[:succes] = "You want to attend the event"
+		redirect_to @event
+	else
+		redirect_to current_user
+	end
   end
   
   def unattend
@@ -78,8 +78,5 @@ class EventsController < ApplicationController
 	current_user.unattend!(@event)
 	redirect_to @event
   end
-  
-  
-  
   
 end

@@ -93,6 +93,15 @@ class UsersController < ApplicationController
 	@users = @route.triers
 	render 'show_follow'
   end
+    
+  def attendees
+	@user = current_user
+	@event = Event.find(params[:event_id])
+	@title = "All Attendees"
+	@users = @event.attendees
+	render 'show_follow'
+  end 
+  
   
   def correct_user
 	  @user = User.find(params[:id])

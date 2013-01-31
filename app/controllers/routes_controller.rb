@@ -81,7 +81,7 @@ class RoutesController < ApplicationController
 	def untry	
 		@route = Route.find(params[:id])
 		current_user.not_tried!(@route.id)
-		unwant
+		redirect_to @route
 	end
 	
 	def triers
@@ -91,7 +91,7 @@ class RoutesController < ApplicationController
 		tried.tried_route_id = @route.id
 		if tried.save
 			flash[:success] = "You've TRIED the route"
-			redirect_to @route
+			unwant
 		else
 			redirect_to current_user
 		end

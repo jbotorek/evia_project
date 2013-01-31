@@ -19,9 +19,14 @@
     <div class="detail_field">
         <span class="detail_head">Designated for:</span>
         <%= @activity.title %>
-    </div>
+    </div><br>
     <div align="center">
         <%= render 'routes/routedetails' %>
+    </div><br>
+	<div class="detail_field">
+        <span class="half_horizontally">
+			<div><%= link_to @event.attendees.count, :controller => :users, :action => :attendees, :event_id => @event.id %> ATTENDEES</div>
+		</span>
     </div>
     <div class="comment form">
         <%= render 'events/event_new_comment' %>

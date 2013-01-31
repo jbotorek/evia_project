@@ -12,12 +12,18 @@
     <div class="showcase_body">
         <%= link_to gravatar_for(@temp_route.user), @temp_route.user %>
         New <b>ROUTE</b> created:
-		<% text = @temp_route.title+ " " + @temp_route.description %>
+		<% text = @temp_route.title+ " - " + @temp_route.description %>
         <%= link_to text, @temp_route %>
     </div>
     <div class="showcase_props">
-        <span class='half_horizontally'><%= @temp_route.wanters.count %> want to try</span>
-        <span class='half_horizontally'><%= @temp_route.triers.count %> tried</span>
+        <span class='half_horizontally'>
+				<%= link_to @temp_route.wanters.count.to_s + " want to try",
+				:controller => :users, :action => :allwanters, :route_id => @temp_route.id %>
+		</span>
+        <span class='half_horizontally'>
+			<%= link_to @temp_route.triers.count.to_s + " already tried",
+				:controller => :users, :action => :alltriers, :route_id => @temp_route.id %>
+		</span>
     </div>
     <div class="showcase_log">
         <span>Posted <%= time_ago_in_words(@temp_route.created_at) %> ago.</span>

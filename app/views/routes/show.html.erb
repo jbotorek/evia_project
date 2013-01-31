@@ -1,5 +1,9 @@
 <% provide(:title, @route.title) %>
 <% content_for :showcase do %>
+	<div class="detail_title">
+		<span><%= @route.title %></span><%= render 'routes/try_button' %>
+		<div class='clear'> </div>
+	</div>
     <%= render 'routedetails' %>
     <div class="detail_field">
         <span class="detail_head">The route is designated for:</span> 

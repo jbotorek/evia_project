@@ -16,7 +16,8 @@
 		<%= link_to text, @temp_event%>
 	</div>
 	<div class="showcase_props">
-		 <%= @temp_event.attendees.count %> attends
+		 <%= link_to @temp_event.attendees.count.to_s + " attend",
+				:controller => :users, :action => :attendees, :event_id => @temp_event.id %>
 	</div>
     <div class="showcase_log">
 		Posted <%= time_ago_in_words(@temp_event.created_at) %> ago.

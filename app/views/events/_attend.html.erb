@@ -3,6 +3,6 @@
 		<%= link_to "Will attend!", attend_event_path(:event_id => @event.id)  %>	
 	<% else %>
 		You are attending the event <br>
-		<%= link_to "DO NOT WANT TO ATTEND", unattend_event_path(:event_id => @event.id) %>
+		<%= link_to "DO NOT WANT TO ATTEND ANYMORE", unattend_event_path(:event_id => @event.id) %>
 	<% end %>
 </p>
