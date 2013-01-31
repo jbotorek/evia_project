@@ -6,6 +6,7 @@ var center;
 var layer;
 var trasaLayer;
 $(document).ready(function(){
+    $("#gpx").hide();
     var center = SMap.Coords.fromWGS84(15.335764, 49.742466);
     m = new SMap(JAK.gel("m"), center, 0);
     m.addDefaultLayer(SMap.DEF_TURIST).enable();
@@ -76,18 +77,6 @@ var addToMap = function(route){
     trasaLayer.addGeometry(g);
 }
 
-function StringtoXML(text){
-    if (window.ActiveXObject){
-      var doc=new ActiveXObject('Microsoft.XMLDOM');
-      doc.async='false';
-      doc.loadXML(text);
-    } else {
-      var parser=new DOMParser();
-      var doc=parser.parseFromString(text,'text/xml');
-    }
-    return doc;
-}
-
 function load() { /* Funkce volaná po stisku tlačítka */
     var value = JAK.gel("gpx").value.trim();
     var doc = $.parseXML(value);
@@ -96,6 +85,7 @@ function load() { /* Funkce volaná po stisku tlačítka */
     var point=[];
     for(i=0;i<pointsFromXml.length;i++){
         point[0] = SMap.Coords.fromWGS84($(pointsFromXml[i]).attr("lon"),$(pointsFromXml[i]).attr("lat"));
+        point[4] = $(pointsFromXml[i]).find("name").text();
         alert(point[0]);
         points.push(point);
         point = [];
