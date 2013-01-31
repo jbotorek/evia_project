@@ -4,6 +4,7 @@
     <div class="detail_field">
         <span class="detail_head">The route is designated for:</span> 
         <% @activities.each do |act| %> 
+			<%= image_tag("ActivityTypesIcons/"+act.id.to_s+".png", :size => "36x36", :alt => act.title) %>
             <%= act.title %> <br>
         <% end %>
     </div>

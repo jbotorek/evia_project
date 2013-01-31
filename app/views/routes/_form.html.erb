@@ -12,9 +12,13 @@
         <%= f.text_field :map %><br />
         <fieldset>
             <legend>Choose route's type</legend>
+			  <% i = 1%>
               <% @types.each do |type| %>
                     <%= check_box_tag 'type_ids[]', type.id %>
-                    <%= h type.title %><br />
+                    <%= image_tag("ActivityTypesIcons/"+i.to_s+".png", :size => "36x36", :alt => type.title) %>
+					<%= type.title %>
+					<br />
+					<%i = i+1%>
               <% end %>
         </fieldset>
     </div>

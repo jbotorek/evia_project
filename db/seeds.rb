@@ -6,9 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-ActivityType.create(title: 'walking', description: 'moving using your own feets')
+ActivityType.create(title: 'hiking', description: 'moving using your own feets')
 ActivityType.create(title: 'cycling', description: 'moving using bicycle')
 ActivityType.create(title: 'swimming', description: 'moving in water using your legs and arms')
+ActivityType.create(title: 'cross-country skiing', description: 'moving on snow using skis')
 
 User.create(email: 'petr24616@seznam.cz', password:'petrpetr', password_confirmation:'petrpetr')
 Route.create(user_id: 1, title: 'prvni cesta', description: 'hezka prvni cesta', map: 'xyz 12.435,2352', activity_type_id: 1)
