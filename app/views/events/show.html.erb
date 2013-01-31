@@ -18,6 +18,7 @@
     </div>
     <div class="detail_field">
         <span class="detail_head">Designated for:</span>
+		<%= image_tag("ActivityTypesIcons/"+@activity.id.to_s+".png", :size => "36x36", :alt => @activity.title) %>
         <%= @activity.title %>
     </div><br>
     <div align="center">

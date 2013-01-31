@@ -14,8 +14,16 @@
 	<%= e.time_select :hour %><br />
 	<%= e.label "Select route for your event:" %><br />	
 	<%= e.collection_select(:route_id, @routes, :id, :title) %><br />
-	<%= e.label "Select type of your event:" %><br />
-	<%= e.collection_select(:event_type_id, @types, :id, :title)%><br />
+	<fieldset>
+		<legend>Choose event's type</legend>
+		  <% i = 1 %>
+		  <% @types.each do |item| %>
+			<%= e.radio_button :event_type_id, item.id %> 
+			<%= image_tag("ActivityTypesIcons/"+i.to_s+".png", :size => "36x36", :alt => item.title) %>
+			<%= item.title %><br />
+			<% i = i+1 %>
+		  <% end %>
+	</fieldset>	
   </div>
   <div class="actions">
     <%= e.submit "Create the event", :class => 'action_button'%>
