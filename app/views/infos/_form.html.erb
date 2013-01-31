@@ -13,11 +13,14 @@
 	<%= f.text_field :house_number %><br />
 	<%= f.label "town" %>
 	<%= f.text_field :town %><br />
-	<%= f.label "bio" %>
-	<%= f.text_area :bio %><br />
+	<%= f.label "bio", :title => 'Tell us anything interesting about yourself...' %>
+	<%= f.text_area :bio, :title => 'Tell us anything interesting about yourself...'  %><br />
   </div>
   <div class = "gravatar_set">
-	<a href = "http://gravatar.com/" target="_blank">Change your profile picture - Gravatar:</a>
+	<a href = "http://gravatar.com/" target="_blank" class="gravatar_set" title = "Gravatar is an image that represents your existence in the eVia
+		and other social networks.	Look at this page to learn everything about this service.">
+		Change your profile picture - Gravatar:
+	</a>
 	<br><br>
   </div>
   <div class="actions">

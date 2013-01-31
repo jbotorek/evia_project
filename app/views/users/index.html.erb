@@ -1,23 +1,23 @@
 <% content_for :showcase do %>
+  <div class="form">
     <h1>Listing users</h1>
+	<div class="allusers">
+		<table>
+		  <tr>
+			<th>Email</th>
+		  </tr>
 
-    <table>
-      <tr>
-        <th>Email</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Show', user %></td>
-        <% if current_user.admin? && !current_user?(user) %>
-            <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-    </table>
+		<% @users.each do |user| %>
+		  <tr>
+			<td><%= user.email %></td>
+			<td><%= link_to 'Show the profile', user %></td>
+			<% if current_user.admin? && !current_user?(user) %>
+				<td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			<% end %>
+		  </tr>
+		<% end %>
+		</table>
+	</div>
+  </div>
 <% end %>
 

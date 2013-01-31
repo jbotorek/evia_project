@@ -9,9 +9,9 @@
       </ul>
     <% end %>
 	<% if @route %>
-	  <%= link_to 'Back to route', @route%>	 
+	  <%= link_to 'Back to route', @route, :class => "back_button"%>	 
 	<% else %>
-	  <%= link_to 'Back to user', current_user %>
+	  <%= link_to 'Back to user', current_user, :class => "back_button", :title => 'Go back to your profile page' %>
 	<% end %>
   </div>
 </div>

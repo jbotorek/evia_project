@@ -1,7 +1,9 @@
 <% content_for :showcase do %>
-<h1>Edit Personal Info  </h1>
-	
-<%= render 'form' %>
+	<div class="form">
+		<h1>Edit Personal Info  </h1>
 
-<%= link_to 'Back', current_user %>
+		<%= render 'form' %>
+
+		<%= link_to 'Back', current_user, :class => "back_button", :title => 'Go back to your profile page'  %>
+	</div>
 <% end %>

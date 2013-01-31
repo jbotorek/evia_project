@@ -2,15 +2,17 @@
     <div class="visit_card summary_part">
           <h1>
             <%= @user.email %>
-          </h1>	
-          <% if @info==nil %>
-             <span> PERSONAL INFO NOT YET PROVIDED </span>
-          <% else %>
-             <span> name: <%= @info.name %> <%= @info.surname %> </span>
-             <span> address: <%= @info.town %>, <%= @info.street %> </span>
-          <% end %>
-          
-          <%= gravatar_for @user %>
+          </h1>	        
+		  <p class = "gravatar"> <%= gravatar_for @user %> </p>
+		  <% if @info==nil || @info.name == "" %>
+			 <p class="info"> <br>PERSONAL INFO NOT YET <br>PROVIDED </p>
+		  <% else %>
+			 <p class="info"> <b>name:</b> <%= @info.name %> <%= @info.surname %> </p>
+			 <p class="info"> <b>address:</b> <%= @info.town %> <%= @info.street %> </p>
+		  <% end %>  
+		  <% unless @info==nil || @info.name == ""%>	
+			  <p class="bio"><b>BIO:</b> <br> <%= @info.bio %> </p>
+		  <% end %>
     </div>
     <div class="clear">
       <%= render 'shared/stats' %>
