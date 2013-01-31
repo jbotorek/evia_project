@@ -2,9 +2,9 @@
   <%= render 'shared/error_messages', object: f.object %>
 
   <div class="field">
-    <%= f.label "Enter your email address:" %>
+    <%= f.label "Enter your email address:", :title => 'email provided will serve as your nickname in eVia'%>
     <%= f.text_field :email %><br />
-	<%= f.label "Choose carefully your password:" %>
+	<%= f.label "Choose carefully your password:", :title => 'password must be longer than 6 characters' %>
     <%= f.password_field :password %><br />
 	<%= f.label :password_confirmation, "Please, repeat your password:" %>
 	<%= f.password_field :password_confirmation %><br />

@@ -354,6 +354,17 @@ div.actions{
 	top:1px;
 }
 
+/*pop-up windows*/
+ .ui-tooltip {
+background: white;
+border: 2px solid black;
+ padding: 10px 20px;
+color: black;
+font: bold 14px "Helvetica Neue", Sans-Serif;
+box-shadow: 0 0 7px black;
+}
+
+
 /* Flash and notice messages ------------*/
 div.notice{
 	text-align:center;
@@ -385,4 +396,9 @@ span.detail_head{
     font-weight:bold;
     font-variant:small-caps;
     display:block;
+}
+div.follow_button{
+	margin-left:90px;
+	margin-top:10px;
+	margin-bottom:-25px;
 }

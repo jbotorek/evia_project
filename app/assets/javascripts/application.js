@@ -17,5 +17,10 @@
 
 $(function() {
 	$( "#event_time" ).datepicker({ dateFormat: 'dd.mm.yy',  showWeek: true, firstDay: 1 });
+	
+	$( document ).tooltip({
+		position: {	my: "center+20 bottom-20",	at: "center" }
+	});
+	
 });
 

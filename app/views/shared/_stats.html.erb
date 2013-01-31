@@ -4,7 +4,7 @@
     <a href="<%= following_user_path(@user) %>">					
           <%= @user.followed_users.count %>
     </a>
-    <span class='stats_info'>following</span>
+    <span class='stats_info' title='Who do you follow?' >following</span>
     
   </span>
   <span class="stats_half">
@@ -12,7 +12,7 @@
     <a href="<%= followers_user_path(@user) %>">
 	  <%= @user.followers.count %>
     </a>
-	<span class='stats_info'>followers</span>
+	<span class='stats_info' title='Who is following your profile?'>followers</span>
   </span>
   
 </div>
