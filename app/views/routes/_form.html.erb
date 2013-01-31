@@ -11,16 +11,17 @@
         <%= f.label "map" %>  
         <%= f.text_area :map %><br />
         <fieldset>
-            <legend>Choose route's type</legend>
+			<legend>Choose route's type</legend>
 			  <% i = 1%>
-              <% @types.each do |type| %>
-                    <%= check_box_tag 'type_ids[]', type.id %>
-                    <%= image_tag("ActivityTypesIcons/"+i.to_s+".png", :size => "36x36", :alt => type.title) %>
+			  <% @types.each do |type| %>
+					<%= check_box_tag 'type_ids[]', type.id %>
+					<%= image_tag("ActivityTypesIcons/"+i.to_s+".png", :size => "36x36", :alt => type.title) %>
 					<%= type.title %>
 					<br />
 					<%i = i+1%>
-              <% end %>
-        </fieldset>
+			  <% end %>
+		</fieldset>
+
     </div>
     <div class="actions">
 		<%= f.submit "Create a new route", :class => 'action_button' %>
