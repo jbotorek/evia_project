@@ -1,4 +1,11 @@
-﻿<%= javascript_include_tag 'http://api4.mapy.cz/loader.js' %>
+﻿<div id="map" class="detail_field">
+    <span class="detail_head">Here is a map of the route:</span><textarea id="gpx"><%= @route.map %></textarea>
+    <div id="m" style="height:500px;"> mapa </div>
+</div>
+<div class="detail_field">
+	<span class="detail_head">Description:</span> <%= @route.description %>
+</div>
+<%= javascript_include_tag 'http://api4.mapy.cz/loader.js' %>
 <script type="text/javascript">
 Loader.load();
 var m;
@@ -92,10 +99,3 @@ function load() { /* Funkce volaná po stisku tlačítka */
     renderMap();
 }
 </script>
-<div id="map" class="detail_field">
-    <span class="detail_head">Here is a map of the route:</span><textarea id="gpx"><%= @route.map %></textarea>
-    <div id="m" style="height:500px;"> mapa </div>
-</div>
-<div class="detail_field">
-	<span class="detail_head">Description:</span> <%= @route.description %>
-</div>
