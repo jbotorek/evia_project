@@ -1,4 +1,4 @@
-== Welcome to eVia
+== eVia
 
 The system is created primarly as a school project to PV249 of FI MUNI (www.fi.muni.cz).
 
@@ -7,3 +7,5 @@ eVia presents mini social network where you can share and explore your tourist r
 Create and share your favourite places. Organize events or simply browse the most popular spots. Comment on content and
 manage new relationships.
 
+
+Welcome to eVia - It's time to hit the road!
