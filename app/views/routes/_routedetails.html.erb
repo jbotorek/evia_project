@@ -86,7 +86,6 @@ function load() { /* Funkce volaná po stisku tlačítka */
     for(i=0;i<pointsFromXml.length;i++){
         point[0] = SMap.Coords.fromWGS84($(pointsFromXml[i]).attr("lon"),$(pointsFromXml[i]).attr("lat"));
         point[4] = $(pointsFromXml[i]).find("name").text();
-        alert(point[0]);
         points.push(point);
         point = [];
     }

@@ -1,15 +1,25 @@
 ﻿<% content_for :showcase do %>
 <div class="form">
-    <h1>New route</h1> 
-    <div id="map_form">
+    <h1>New route</h1>
+	<span class="newroutehelp" title="Specify your route by clicking to the interactive map. You can zoom and move the map.
+	If you activate the 'place picker' - by clicking on the button Turn On place picker - you can create your route. ">
+		Need some help?
+	</span>
+    <div class="map_form">
         <%= form_tag({},:method=>:get, :remote=>true,"data-type" => :json,:id=>'getCoords') do %>
-              <%= text_field_tag "query", "adresa" %>
-              <%= submit_tag "Find" %>
+              <%= text_field_tag "query", "Address", 
+			  :title => "If you want to add exact spot to your route map, you can use this field. When address is found, it will be added to your route automatically." %>
+              <div class="find_address"><%= submit_tag "Find", :class => 'action_button' %></div>
         <% end %>
-        <div id="control"><a href="#">zapnout</a></div>
-        <div id="points" style="background-color:red;"> ahoj</div>
+        <div id="control"><a href="#" class="map_control" title="activates and deactivates the 'Place Picker'">
+			Turn ON place picker
+		</a></div>
+        <div id="points" style="background-color:red;"></div>
         <div id="m" style="height:500px">mapa</div>
-        <a href="javascript:routeToGpx()">exportovat mapu</a>
+        <a href="javascript:routeToGpx()" class="map_control" 
+			title="Once you're finished with your route - use this button to export it to the text representation.">
+			EXPORT MAP
+		</a>
     </div>
     <%= render 'form' %>
 </div>
@@ -67,7 +77,6 @@ function routeToGpx(){
     for (i=0;i<points.length;i++){
         p = points[i];
         wgspoint = p[0].toWGS84(0);
-        alert(wgspoint);
         gpx = gpx + '<trkpt lat="'+wgspoint[1]+'" lon="'+wgspoint[0]+'"><name>'+p[4]+'</name></trkpt>'
     }
     gpx = gpx + '</trkseg>';
@@ -82,7 +91,6 @@ function selectOneAndAddToMap(coordX,coordY,label){
     point[4] = label;
     points.push(point);
     $('#points').html('');
-    alert(points[0][0]);
     renderMap();
 }
 
@@ -90,11 +98,11 @@ $('#control a').click(function(){
         if(clickOn==false){
             turnClickOn();
             clickOn = true;
-            $(this).html("vypnout");
+            $(this).html("Turn OFF place picker");
         }else{
             clickOn = false;
             turnClickOff();
-            $(this).html("zapnout");
+            $(this).html("Turn ON place picker");
         }
     });
 
@@ -106,7 +114,6 @@ function turnClickOff(){
     m.getSignals().removeListener(mapClick);
 }
 function click(e, elm) { 
-    alert(e.type);
     var coords = SMap.Coords.fromEvent(e.data.event, m);
     var point = [];
     point[0]=coords;

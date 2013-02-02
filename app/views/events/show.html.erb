@@ -1,10 +1,5 @@
 <% provide(:title, @event.title) %>
 <% content_for :showcase do %>
-    <div class="controls">
-        <% if current_user.id == @event.user_id %>
-            <%= link_to 'Update event information', edit_event_path(@event.id) %>
-        <% end %>
-    </div>
     <div class="detail_title">
         <span><%= @event.title %></span><%= render 'attend' %>
         <div class='clear'> </div>
@@ -21,6 +16,11 @@
 		<%= image_tag("ActivityTypesIcons/"+@activity.id.to_s+".png", :size => "36x36", :alt => @activity.title) %>
         <%= @activity.title %>
     </div><br>
+	<div class="control">
+        <% if current_user.id == @event.user_id %>
+            <%= link_to 'Update event information', edit_event_path(@event.id), :class => 'action_button' %>
+        <% end %>
+    </div>
     <div align="center">
         <%= render 'routes/routedetails' %>
     </div><br>

@@ -325,6 +325,7 @@ div.actions{
     margin: 15px auto;
 }
 .action_button{
+	margin-top:15px;
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -379,6 +380,7 @@ div.errors{
 	margin:25px 0px 25px 15px;
 }
 div.detail_title span{
+	margin: 20px 0px 15px 10px;
     float:left;
     font-weight:bold;
     font-size:large;
@@ -475,4 +477,45 @@ div.show_follow_gravatar{
 }
 div.show_follow_email{
 	margin: -60px 0px 40px 130px;
+}
+div.find_address{
+	margin: 10px 0px 10px 300px;
+}
+div.map_form{
+	margin-top: 30px;
+}
+span.newroutehelp{
+	color:#707070;
+	float:right;
+	margin-right:20px;
+}
+/*Place picker button*/
+.map_control {
+	margin: 5px 0px 10px 30px;
+	-moz-box-shadow:inset 0px 1px 5px -31px #fceaca;
+	-webkit-box-shadow:inset 0px 1px 5px -31px #fceaca;
+	box-shadow:inset 0px 1px 5px -31px #fceaca;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffce79), color-stop(1, #eeaf41) );
+	background:-moz-linear-gradient( center top, #ffce79 5%, #eeaf41 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffce79', endColorstr='#eeaf41');
+	background-color:#ffce79;
+	border:5px solid #c27f1b;
+	display:inline-block;
+	color:#333333;
+	font-family:Georgia;
+	font-size:13px;
+	font-weight:bold;
+	padding:6px 4px;
+	text-decoration:none;
+}.map_control:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #eeaf41), color-stop(1, #ffce79) );
+	background:-moz-linear-gradient( center top, #eeaf41 5%, #ffce79 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeaf41', endColorstr='#ffce79');
+	background-color:#eeaf41;
+}.map_control:active {
+	position:relative;
+	top:1px;
+}
+div.control{
+	margin: 5px 0px 10px 20px;
 }
