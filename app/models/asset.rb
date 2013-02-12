@@ -16,5 +16,7 @@ class Asset < ActiveRecord::Base
   attr_accessible :route_id, :image_file_name, :image
   
   belongs_to :route, :polymorphic => true 
-  has_attached_file :image
+  has_attached_file :image, 
+					:url  => "/assets/routes/:id/:style/:basename.:extension",
+					:path => ":rails_root/public/assets/routes/:id/:style/:basename.:extension"
 end
