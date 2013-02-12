@@ -404,6 +404,40 @@ div.follow_button{
 	margin-top:10px;
 	margin-bottom:-25px;
 }
+div.photo_gallery{
+    background: #444;
+    margin: 0 auto;
+}
+
+div.photo_thumb{
+    width:250px;
+    height:185px;
+    float:left;
+    text-align:center;
+}
+div#photo_detail{
+    text-align:center;
+    position:fixed;
+    top:10%;
+    left:10%;
+    width:80%;
+    height:80%;
+    z-index:5;
+    display:none;
+}
+div#photo_detail img{
+    box-shadow:0px 0px 150px 100px black;
+    }
+img.wide {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+}
+img.tall {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+}
 p.bio{
 	width:240px;
 	margin-top:25px;
