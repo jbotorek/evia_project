@@ -9,6 +9,7 @@ class RoutesController < ApplicationController
 	  @types = ActivityType.all
       @user = current_user
       @info = Info.find_by_user_id(@user.id)
+	  5.times {@route.assets.build}
 	end
 	
 	def create

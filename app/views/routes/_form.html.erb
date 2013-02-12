@@ -1,9 +1,15 @@
-<%= form_for(@route) do |f| %>
+<%= form_for @route, :html => {:multipart => true} do |f| %>
 	<div class="errors">
 		<%= render 'shared/error_messages', object: f.object %>
 	</div>
 	
     <div class="field">
+		<div class ="paperclip">
+			<h2> PAPERCLIP </h2>
+			<%= file_field_tag('route_assets_asset', multiple: true, name: "route[assets_attributes][][asset]") %>
+				
+		</div>
+	
         <%= f.label "title" %>    
         <%= f.text_field :title %><br />
         <%= f.label "description" %>

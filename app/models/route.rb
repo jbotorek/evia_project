@@ -13,7 +13,7 @@
 #
 
 class Route < ActiveRecord::Base
-  attr_accessible :description, :map, :title, :user_id, :activity_type_id
+  attr_accessible :description, :map, :title, :user_id, :activity_type_id, :assets_attributes, :assets
   
   # user that created a route
   belongs_to :user
@@ -36,6 +36,11 @@ class Route < ActiveRecord::Base
   has_many :route_comment_relationships, foreign_key: "route_id", dependent: :destroy
   has_many :commenters, through: :route_comment_relationships, source: :commenter
   
+  
+  #IMAGES
+  has_many :assets, :dependent => :destroy
+  accepts_nested_attributes_for :assets
+    
   default_scope order: 'routes.created_at DESC'
   
   validates :user_id, presence: true
