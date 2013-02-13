@@ -28,7 +28,11 @@ ActiveRecord::Schema.define(:version => 20130213131615) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "assets", ["route_id"], :name => "index_assets_on_route_id"
+  add_index "assets", ["user_id"], :name => "index_assets_on_user_id"
 
   create_table "event_attends", :force => true do |t|
     t.integer  "attendee_id"
