@@ -13,7 +13,7 @@
 #
 
 class Route < ActiveRecord::Base
-  attr_accessible :description, :map, :title, :user_id, :activity_type_id, :assets_attributes
+  attr_accessible :description, :map, :title, :user_id, :activity_type_id, :assets_attributes, :criterion
   
   # user that created a route
   belongs_to :user
