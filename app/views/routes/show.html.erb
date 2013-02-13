@@ -56,5 +56,12 @@
     <div class="comment_stream">
         <%= render 'route_comments_stream' %>
     </div>
+	
+	<div class="photogalleries">
+		<h3>Photos by:</h3>
+		<% @allgalerists.each do |gal| %> 
+            <%= gal.email %> <br>
+        <% end %>
+	</div>
     <%= link_to 'Back', @user ,:class => "back_button", :title => 'Go back to your profile page' %>
 <% end %>

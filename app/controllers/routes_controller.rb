@@ -67,6 +67,22 @@ class RoutesController < ApplicationController
 	  @activities = @route.activity_types
 	  @comment = RouteCommentRelationship.new
 	  @allcomments = @route.all_comments(@route.id)
+	  @allgalerists = galerist(@route.id)
+	end
+	
+	def galerist(route_id)
+		allgalerist_id_duplicated = current_user.get_galerist_ids(route_id)
+		allgalerist_id = []
+		allgalerist_id_duplicated.each { |dup|
+			if(!allgalerist_id.include?(dup.user_id))
+				allgalerist_id << dup.user_id
+			end
+		}
+		allgalerists = []
+		allgalerist_id.each { |id|
+			allgalerists << User.find(id)	
+		}
+		allgalerists
 	end
 	
 	def wanters

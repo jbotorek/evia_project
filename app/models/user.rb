@@ -116,10 +116,15 @@ class User < ActiveRecord::Base
 	event_attends.find_by_attend_event_id(event.id).destroy
   end
   
+  def get_galerist_ids(route_id)
+	ids = Asset.find_by_sql(["SELECT user_id FROM assets WHERE (route_id = ?)",	route_id])
+  end
+  
   private
   def create_remember_token
 	self.remember_token = SecureRandom.urlsafe_base64
   end
+  
   
   
 end
