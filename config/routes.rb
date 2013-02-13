@@ -36,6 +36,7 @@ Evia::Application.routes.draw do
 	match '/signout', to:'sessions#destroy'
 	match '/allwanters', to: 'users#allwanters'
 	match '/alltriers', to:'users#alltriers'	
+	match '/photogallery', to:'routes#photogallery'
 
   
   root :to => 'static_pages#home'

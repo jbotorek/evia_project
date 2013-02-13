@@ -85,6 +85,13 @@ class RoutesController < ApplicationController
 		allgalerists
 	end
 	
+	def photogallery
+		@user = current_user
+		@photo_user = User.find(params[:user_id])
+		@route = Route.find(params[:route_id])
+		@all_photos = current_user.get_photos_from_galerist_to_route(@photo_user.id, @route.id)
+	end
+	
 	def wanters
 		@route = Route.find(params[:route_id])
 		want_try = WantTryRelationship.new	
