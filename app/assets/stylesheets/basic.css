@@ -40,15 +40,21 @@ header#site_head a{
 		}
 
 		.header_cont h1 a {
-			background: url(images/logo.png) no-repeat;
-			width: 143px;
-			height: 45px;
+            margin-top:-10px;
+			background: url(logo.png) no-repeat;
+            background-size:contain;
+			width: 160px;
+			height: 60px;
 			display: block;
+            color: #000; /* Fallback for older browsers */
+            color: rgba(0, 0, 0, 0.5);
 		}
 
 		.header_cont h1 a:hover {
-			background-position: 0px -45px;
+            
 		}
+        .header_cont h1 a:hover{
+        }
 
 		nav.head_nav {
 			float: right;
@@ -414,6 +420,38 @@ div.photo_thumb{
     height:185px;
     float:left;
     text-align:center;
+    overflow:hidden;
+    margin-bottom:5px;
+    margin-top:5px;
+    margin-left:2px;
+    margin-right:3px;
+}
+div.gallery_entry{
+    display:inline-block;
+    text-align:center;
+    margin-bottom:5px;
+    margin-top:5px;
+    margin-left:2px;
+    margin-right:3px;
+}
+div.gallery_entry span{
+    display:inline-block;
+    z-index:5;
+    margin-top:-20px;
+}
+div.gallery_entry a{
+    display:inline-block;
+    color:white;
+    text-shadow: -1px 0px 3px rgb(153,102,0), 0px 1px 3px rgb(153,102,0), 1px 0px 3px rgb(153,102,0), 0px -1px 3px rgb(153,102,0);
+    
+    font-weight:bold;
+}
+div.gallery_thumb{
+    width:250px;
+    height:200px;
+    text-align:center;
+    box-shadow:0px 0px 3px 1px black;
+    overflow:hidden;
 }
 div#photo_detail{
     text-align:center;
@@ -429,12 +467,12 @@ div#photo_detail img{
     box-shadow:0px 0px 150px 100px black;
     }
 img.wide {
-    max-width: 100%;
     max-height: 100%;
+    max-width: 100%;
     height: auto;
 }
 img.tall {
-    max-height: 100%;
+   max-height: 100%;
     max-width: 100%;
     width: auto;
 }

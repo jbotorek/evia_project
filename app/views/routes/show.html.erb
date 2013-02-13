@@ -3,26 +3,7 @@
 <script type="text/javascript">
     var detailOn = false;
     $(window).load(function(){
-     $('.photo_thumb').find('img').each(function(){
-      var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
-      $(this).addClass(imgClass);
-     });
-     
-    $('.photo_thumb a').click(function(ev){
-        ev.preventDefault();
-        var img = $(this).find('img');
-        $('#photo_detail').html('');
-        img.clone().appendTo('#photo_detail');
-        $('#photo_detail').show();
-        detailOn = true;
-        var imgClass = (img.width/img.height > 1) ? 'wide' : 'tall';
-        $('#photo_detail > img').addClass(imgClass);
-        
-     });
-     $('#photo_detail').click(function(){
-        $('#photo_detail').hide();
-     });
-     
+    fitGalleryThumbs(); 
     });
     $(document).ready(function(){
         $('.panels').hide();
@@ -32,6 +13,24 @@
             $(this.hash).fadeIn();
         });
     });
+    function fitGalleryThumbs(){
+        $('.gallery_thumb').find('img').each(function(){ 
+            var thumbWidth = $('.gallery_thumb').css('width').match(/([0-9]+)/)[0];
+            var thumbHeight = $('.gallery_thumb').css('height').match(/([0-9]+)/)[0];
+            var originalWidth = this.width;
+            var originalHeight = this.height;
+            var imgClass = ((this.width-thumbWidth)/(this.height-thumbHeight) > 1) ? 'wide' : 'tall';
+            if((this.width/thumbWidth)/(this.height/thumbHeight) > 1){
+                $(this).width("auto").height(thumbHeight+"px");
+                ratio = originalHeight/thumbHeight;
+                $(this).css('margin-left',-(originalWidth/ratio-thumbWidth)/2);
+            }else{
+                $(this).width(thumbWidth+"px").height("auto");
+                ratio = originalWidth/thumbWidth;
+                $(this).css('margin-top',-(originalHeight/ratio-thumbHeight)/2);
+            }
+        });
+    }
 </script>
     <div class="detail_title">
 		<span><%= @route.title %></span><%= render 'routes/try_button' %>
@@ -45,13 +44,19 @@
         <%= render 'routedetails' %>
     </div>
     <div id="photos" class="panels">
-        <% @route.assets.each do |img| %>
-            <div class='photo_thumb'>
-                <a href="<%= img.image%>"><img src="<%= img.image%>"/></a>
-            </div>
+		<h3>Photos by:</h3>
+		<% @allgalerists.each do |gal| %> 
+            <% photo = @thumbnails[gal.id] %>
+            <div class="gallery_entry"> 
+                    <%= link_to :controller => :routes, :action => :photogallery, :user_id => gal.id, :route_id => @route.id  do %> 
+                       <div class="gallery_thumb"><%= image_tag('photogalleries/' + photo.id.to_s+ '/' + photo.image_file_name, :alt => photo.image_file_name) %></div>
+                        <span><%= gal.email%></span>
+                    <% end %>
+                </div>
         <% end %>
             <div class="clear"> </div>
     </div>
+    <div class="clear"> </div>
     <div class="detail_field">
         <span class="half_horizontally"><%= render 'want_try' %></span>
         <span class="half_horizontally"><%= render 'tried' %></span>
@@ -62,14 +67,5 @@
     <div class="comment_stream">
         <%= render 'route_comments_stream' %>
     </div>
-	
-	<div class="photogalleries">
-		<h3>Photos by:</h3>
-		<% @allgalerists.each do |gal| %> 
-            <%= link_to gal.email, :controller => :routes, :action => :photogallery,
-				:user_id => gal.id, :route_id => @route.id %> 
-			<br>
-        <% end %>
-	</div>
     <%= link_to 'Back', @user ,:class => "back_button", :title => 'Go back to your profile page' %>
 <% end %>

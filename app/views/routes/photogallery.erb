@@ -1,15 +1,52 @@
 <% content_for :showcase do %>
-
+    <script type="text/javascript">
+    $(window).load(function(){
+        fitPhotoThumbs();
+        
+        $('.photo_thumb a').click(function(ev){
+            ev.preventDefault();
+            var img = $(this).find('img');
+            $('#photo_detail').html('');
+            img.clone().appendTo('#photo_detail');
+            $('#photo_detail').show();
+            detailOn = true;
+            var imgClass = (img.width/img.height > 1) ? 'wide' : 'tall';
+            /** removing styles assigned to pictures by fitPhotoThumbs namely width, height, margin-top, margin-left **/
+            $('#photo_detail > img').css("width","").css("height","").css("margin-top","").css("margin-left","").addClass(imgClass);
+            
+        });
+        $('#photo_detail').click(function(){
+            $('#photo_detail').hide();
+        });
+    });
+    function fitPhotoThumbs(){
+        $('.photo_thumb').find('img').each(function(){ 
+            var thumbWidth = $('.photo_thumb').css('width').match(/([0-9]+)/)[0];
+            var thumbHeight = $('.photo_thumb').css('height').match(/([0-9]+)/)[0];
+            var originalWidth = this.width;
+            var originalHeight = this.height;
+            var imgClass = ((this.width-thumbWidth)/(this.height-thumbHeight) > 1) ? 'wide' : 'tall';
+            if((this.width/thumbWidth)/(this.height/thumbHeight) > 1){
+                $(this).css("width","auto").css("height",thumbHeight+"px");
+                ratio = originalHeight/thumbHeight;
+                $(this).css('margin-left',-(originalWidth/ratio-thumbWidth)/2);
+            }else{
+                $(this).css("width",thumbWidth+"px").css("height","auto");
+                ratio = originalWidth/thumbWidth;
+                $(this).css('margin-top',-(originalHeight/ratio-thumbHeight)/2);
+            }
+        });
+    } 
+    </script>
 	<h1> Photogallery </h1>	
-	<%= @photo_user.email %>
-	<br>
-	<%= @all_photos.each do |photo|%>
-		<%= photo.image_file_name %> 
-		<%= image_tag("photogalleries/" + photo.id.to_s+ "/" + photo.image_file_name, 
-				 :size => "200x200", :alt => photo.image_file_name) %>
-		<br><br>
+	<div>
+	<% @all_photos.each do |photo|%>
+        <div class="photo_thumb">
+            <%= link_to image_tag("photogalleries/" + photo.id.to_s+ "/" + photo.image_file_name, :alt => photo.image_file_name) %>
+        </div>
 	<% end %>
-	
+        <div class="clear"> </div>
+	</div>
 	
 	<br><br><br><br>
 	<%= link_to 'go back to the route', @route %>
