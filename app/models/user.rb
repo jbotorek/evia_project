@@ -120,6 +120,11 @@ class User < ActiveRecord::Base
 	ids = Asset.find_by_sql(["SELECT user_id FROM assets WHERE (route_id = ?)",	route_id])
   end
   
+  def get_photos_from_galerist_to_route(user_id, route_id)
+	photos = Asset.find_by_sql(["SELECT * FROM assets WHERE (route_id = ?) AND (user_id = ?)",
+		route_id, user_id])
+  end
+  
   private
   def create_remember_token
 	self.remember_token = SecureRandom.urlsafe_base64

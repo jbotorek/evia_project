@@ -1,0 +1,16 @@
+<% content_for :showcase do %>
+
+	<h1> Photogallery </h1>	
+	<%= @photo_user.email %>
+	<br>
+	<%= @all_photos.each do |photo|%>
+		<%= photo.image_file_name %> 
+		<%= image_tag("photogalleries/" + photo.id.to_s+ "/" + photo.image_file_name, 
+				 :size => "200x200", :alt => photo.image_file_name) %>
+		<br><br>
+	<% end %>
+	
+	
+	<br><br><br><br>
+	<%= link_to 'go back to the route', @route %>
+<% end %>

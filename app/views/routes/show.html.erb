@@ -66,7 +66,9 @@
 	<div class="photogalleries">
 		<h3>Photos by:</h3>
 		<% @allgalerists.each do |gal| %> 
-            <%= gal.email %> <br>
+            <%= link_to gal.email, :controller => :routes, :action => :photogallery,
+				:user_id => gal.id, :route_id => @route.id %> 
+			<br>
         <% end %>
 	</div>
     <%= link_to 'Back', @user ,:class => "back_button", :title => 'Go back to your profile page' %>

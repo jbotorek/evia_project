@@ -18,10 +18,10 @@ class Asset < ActiveRecord::Base
   
   belongs_to :route, :polymorphic => true 
   has_attached_file :image, 
-					:url  => "/assets/routes/:id/:style/:basename.:extension",
-					:path => ":rails_root/public/assets/routes/:id/:style/:basename.:extension"
+					:url  => "/assets/routes/:id/:basename.:extension",
+					:path => ":rails_root/app/assets/images/photogalleries/:id/:basename.:extension"
 					
-  validates :image_file_name, presence: true
+  validates :image_file_name, presence: true, uniqueness: true
   
   #method used when saving new image/images - according to the given route it returns
   #array of images without user_id provided
