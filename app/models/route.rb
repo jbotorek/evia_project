@@ -13,7 +13,7 @@
 #
 
 class Route < ActiveRecord::Base
-  attr_accessible :description, :map, :title, :user_id, :activity_type_id, :assets_attributes
+  attr_accessible :id, :description, :map, :title, :user_id, :activity_type_id, :assets_attributes
   
   # user that created a route
   belongs_to :user
@@ -58,6 +58,7 @@ class Route < ActiveRecord::Base
   def all_comments(routeid)
 	all_comments = Route.find_by_sql(["SELECT * FROM route_comment_relationships WHERE (route_id = ?)", routeid])
   end
+  
   
   
   

@@ -9,7 +9,6 @@ class RoutesController < ApplicationController
 	  @types = ActivityType.all
       @user = current_user
       @info = Info.find_by_user_id(@user.id)
-	  5.times {@route.assets.build}
 	end
 	
 	def create
@@ -28,12 +27,22 @@ class RoutesController < ApplicationController
 				activityRelation.route_id = @route.id
 				activityRelation.save!
 			}
+			assignUserId(@route.id)
 			flash[:success] = "Route created!"
 			redirect_to current_user
 		  else
 			render 'new'
 		  end
 	  end
+	end
+	
+	def assignUserId(route_id)
+		a = Asset.new
+		images_without_user = a.notUsersSet(route_id)
+		images_without_user.each { |image|
+				image.user_id = current_user.id
+				image.save
+		}		
 	end
 	
 	#if the route is used in some map - the "owner" of the event becomes the owner of the route instead the original user 
