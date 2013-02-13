@@ -24,28 +24,34 @@
      });
      
     });
+    $(document).ready(function(){
+        $('.panels').hide();
+        $('#maps').fadeIn();
+        $('.switch a').click(function(){
+            $('.panels').hide();
+            $(this.hash).fadeIn();
+        });
+    });
 </script>
-	<div class="detail_title">
+    <div class="detail_title">
 		<span><%= @route.title %></span><%= render 'routes/try_button' %>
 		<div class='clear'> </div>
 	</div>
-    <%= render 'routedetails' %>
-    <div class="detail_field photo_gallery">
-    <% @route.assets.each do |img| %>
-        <div class='photo_thumb'>
-            <a href="<%= img.image%>"><img src="<%= img.image%>"/></a>
-        </div>
-    <% end %>
-        <div class="clear"> </div>
+    
+    <div class="switch">
+        <span class="half_horizontally"><a href="#maps">Mapa</a></span><span class="half_horizontally"><a href="#photos">Foto</a></span>
     </div>
-    <div class="detail_field">
-        <span class="detail_head">The route is designated for:</span> 
-        <% @activities.each do |act| %> 
-			<%= image_tag("ActivityTypesIcons/"+act.id.to_s+".png", :size => "36x36", :alt => act.title) %>
-            <%= act.title %> <br>
+    <div id="maps" class="panels">
+        <%= render 'routedetails' %>
+    </div>
+    <div id="photos" class="panels">
+        <% @route.assets.each do |img| %>
+            <div class='photo_thumb'>
+                <a href="<%= img.image%>"><img src="<%= img.image%>"/></a>
+            </div>
         <% end %>
+            <div class="clear"> </div>
     </div>
-
     <div class="detail_field">
         <span class="half_horizontally"><%= render 'want_try' %></span>
         <span class="half_horizontally"><%= render 'tried' %></span>

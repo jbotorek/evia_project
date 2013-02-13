@@ -5,7 +5,14 @@
 <div class="detail_field">
 	<span class="detail_head">Description:</span> <%= @route.description %>
 </div>
-<%= javascript_include_tag 'http://api4.mapy.cz/loader.js' %>
+
+    <div class="detail_field">
+        <span class="detail_head">The route is designated for:</span> 
+        <% @activities.each do |act| %> 
+			<%= image_tag("ActivityTypesIcons/"+act.id.to_s+".png", :size => "36x36", :alt => act.title) %>
+            <%= act.title %> <br>
+        <% end %>
+    </div>
 <script type="text/javascript">
 Loader.load();
 var m;
