@@ -16,6 +16,14 @@
 		</a></div>
         <div id="points" style="background-color:red;"></div>
         <div id="m" style="height:500px">mapa</div>
+        <div>
+            <select id="select_criterion">
+                <option value="bike1">Bike on paths</option>
+                <option value="bike3">Bike on roads</option>
+                <option value="bike2">Bike on both</option>
+                <option value="turist1">Tourist path</option>
+            </select>
+        </div>
         <a href="javascript:routeToGpx()" class="map_control" 
 			title="Once you're finished with your route - use this button to export it to the text representation.">
 			EXPORT MAP
@@ -32,6 +40,7 @@ var layer;
 var trasaLayer;
 var mapClick;
 var clickOn=false;
+var criterion = "bike1";
 
 $(document).ready(function(){
     var center = SMap.Coords.fromWGS84(15.335764, 49.742466);
@@ -68,7 +77,11 @@ $(document).ready(function(){
     var form = JAK.gel("getCoords");
     JAK.Events.addListener(form, "submit", geokoduj); /* Při odeslání formuláře pustit geokódování */
 });
-
+$('#select_criterion').change(function(){
+    criterion = $(this).val();
+    $('#route_criterion').val(criterion);
+    renderMap();
+});
 function routeToGpx(){
     var gpx = '';
     gpx = gpx + '<gpx creator="eVia" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">'
@@ -169,7 +182,7 @@ function renderMap(){
         trasaLayer.removeAll();
         addPoints();
         if(points.length>1){
-            var route = new SMap.Route(getPointsCoords(), addToMap, {criterion:"bike1"});
+            var route = new SMap.Route(getPointsCoords(), addToMap, {criterion:criterion});
         }
         /*var options = {};
         var marker = new SMap.Marker(center, "myMarker", options);

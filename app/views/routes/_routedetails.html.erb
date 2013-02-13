@@ -12,6 +12,7 @@ var m;
 var center;
 var layer;
 var trasaLayer;
+var criterion = "<%= @route.criterion %>";
 $(document).ready(function(){
     $("#gpx").hide();
     var center = SMap.Coords.fromWGS84(15.335764, 49.742466);
@@ -65,7 +66,7 @@ function renderMap(){
         trasaLayer.removeAll();
         addPoints();
         if(points.length>1){
-            var route = new SMap.Route(getPointsCoords(), addToMap, {criterion:"bike1"});
+            var route = new SMap.Route(getPointsCoords(), addToMap, {criterion:criterion});
         }
         /*var options = {};
         var marker = new SMap.Marker(center, "myMarker", options);
@@ -73,7 +74,7 @@ function renderMap(){
         var point = SMap.Coords.fromWGS84(16.9654061,49.0);
         var anotherMarker  = new SMap.Marker(point, "another", options);
         layer.addMarker(anotherMarker);
-        route = new SMap.Route([center,point], addToMap, {criterion:"bike1"});*/
+        route = new SMap.Route([center,point], addToMap, {criterion:"fast"});*/
     });
 }
 var addToMap = function(route){

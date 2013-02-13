@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130213115507) do
+ActiveRecord::Schema.define(:version => 20130213131615) do
 
   create_table "activity_types", :force => true do |t|
     t.string   "title"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20130213115507) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "activity_type_id"
+    t.string   "criterion"
   end
 
   add_index "routes", ["title", "created_at", "user_id"], :name => "index_routes_on_title_and_created_at_and_user_id"
