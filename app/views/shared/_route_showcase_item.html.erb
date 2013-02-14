@@ -1,9 +1,16 @@
     <div class="showcase_controls">
         <% if current_user?(@temp_route.user) %>
-            <%= link_to "x", @temp_route, method: :delete,
+			<% if is_route_asset_empty?(@temp_route)%>
+				<%= link_to "x", @temp_route, method: :delete,
+                                             alt: "delete",
+                                             data: { confirm: "You sure? - there are some photos associated with the route!!!" },
+                                             title: "delete route" %>
+			<% else %>
+				<%= link_to "x", @temp_route, method: :delete,
                                              alt: "delete",
                                              data: { confirm: "You sure?" },
                                              title: "delete route" %>
+			<% end %>
         <% end %>
     </div>
     <div class="showcase_user">

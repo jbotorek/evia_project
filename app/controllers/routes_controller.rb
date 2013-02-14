@@ -66,6 +66,8 @@ class RoutesController < ApplicationController
 	
 	#if the route is used in some map - the "owner" of the event becomes the owner of the route instead the original user 
 	def destroy
+	  photos = @route.assets					#delete photos associated with given route
+	  delete_photos(photos)						#
 	  event = Event.find_by_route_id(@route.id)
 	  unless event.nil?
 	    @route.update_attributes(:user_id => event.user_id)	
@@ -76,6 +78,12 @@ class RoutesController < ApplicationController
 		@route.destroy
 		flash[:success] = "Route was deleted!"
 		redirect_to current_user
+	  end
+	end
+	
+	def delete_photos(photos)
+	  photos.each do |photo|
+	    FileUtils.rm_rf("app/assets/images/photogalleries/"+photo.id.to_s)
 	  end
 	end
 	
