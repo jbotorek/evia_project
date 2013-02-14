@@ -77,10 +77,14 @@ $(document).ready(function(){
     var form = JAK.gel("getCoords");
     JAK.Events.addListener(form, "submit", geokoduj); /* Při odeslání formuláře pustit geokódování */
 });
-$('#select_criterion').change(function(){
-    criterion = $(this).val();
+$(document).ready(function(){
+    criterion = $('#select_criterion').val();
     $('#route_criterion').val(criterion);
-    renderMap();
+    $('#select_criterion').change(function(){
+        criterion = $(this).val();
+        $('#route_criterion').val(criterion);
+        renderMap();
+    });
 });
 function routeToGpx(){
     var gpx = '';
