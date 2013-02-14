@@ -7,8 +7,12 @@
     });
     $(document).ready(function(){
         $('.panels').hide();
-        $(window.location.hash).fadeIn();
-        checkWhetherRenderMap(window.location.hash);
+        if(window.location.hash==""){
+            window.location.hash="info";
+        }
+        var hash = window.location.hash;
+        $(hash).fadeIn();
+        checkWhetherRenderMap(hash);
         $('.switch a').click(function(){
             $('.panels').hide();
             $(this.hash).fadeIn();
