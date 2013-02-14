@@ -7,7 +7,7 @@
     });
     $(document).ready(function(){
         $('.panels').hide();
-        $('#maps').fadeIn();
+        $('#info').fadeIn();
         $('.switch a').click(function(){
             $('.panels').hide();
             $(this.hash).fadeIn();
@@ -31,19 +31,22 @@
             }
         });
     }
-</script>
-    <div class="detail_title">
-		<span><%= @route.title %></span><%= render 'routes/try_button' %>
-		<div class='clear'> </div>
+</script>    
+    <div class="switch summary_part">
+        <span class="half_horizontally">
+            <span class="half_horizontally"><a href="#info">Info</a></span>
+            <span class="half_horizontally"><a href="#maps">Map</a></span>
+        </span>
+        <span class="half_horizontally">
+            <span class="half_horizontally"><a href="#gallery">Gallery</a></span>
+            <span class="half_horizontally"><a href="#comments">Comments</a></span>
+        </span>
+    </div>
+    <div class="wanna_try"><%= render 'routes/try_button' %>
 	</div>
     
-    <div class="switch">
-        <span class="half_horizontally"><a href="#maps">Mapa</a></span><span class="half_horizontally"><a href="#photos">Foto</a></span>
-    </div>
-    <div id="maps" class="panels">
-        <%= render 'routedetails' %>
-    </div>
-    <div id="photos" class="panels">
+    <%= render 'routedetails' %>
+    <div id="gallery" class="panels">
 		<h3>Photos by:</h3>
 		<% @allgalerists.each do |gal| %> 
             <% photo = @thumbnails[gal.id] %>
@@ -61,11 +64,13 @@
         <span class="half_horizontally"><%= render 'want_try' %></span>
         <span class="half_horizontally"><%= render 'tried' %></span>
     </div>
-    <div class="form">
-        <%= render 'route_new_comment' %>
-    </div>
-    <div class="comment_stream">
-        <%= render 'route_comments_stream' %>
+    <div id="comments" class="panels">
+        <div class="form">
+            <%= render 'route_new_comment' %>
+        </div>
+        <div class="comment_stream">
+            <%= render 'route_comments_stream' %>
+        </div>
     </div>
     <%= link_to 'Back', @user ,:class => "back_button", :title => 'Go back to your profile page' %>
 <% end %>

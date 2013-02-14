@@ -4,7 +4,7 @@
     <%if !current_user.want_try?(@route) %>
         <%= link_to "Want to try", wanters_route_path(:route_id => @route.id)  %>
     <% else %>
-        <%= link_to "Already tried route", triers_route_path(:route_id => @route.id)  %>
-        <%= link_to "Don't want to try it anymore", :controller => :routes, :action => :unwant %>
+        <span class="half_horizontally"><%= link_to "Already tried route", triers_route_path(:route_id => @route.id)  %></span>
+        <span class="half_horizontally"><%= link_to "Don't want to try it anymore", :controller => :routes, :action => :unwant %></span>
     <% end %>
 <% end %>

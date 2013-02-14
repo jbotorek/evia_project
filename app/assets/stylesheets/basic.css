@@ -385,13 +385,43 @@ div.errors{
 	font-weight:bold;
 	margin:25px 0px 25px 15px;
 }
+div.switch a{
+    font-size:large;
+    text-decoration:none;
+    font-variant:small-caps;
+    color:white;
+    text-shadow: -1px 0px 3px rgb(153,102,0), 0px 1px 3px rgb(153,102,0), 1px 0px 3px rgb(153,102,0), 0px -1px 3px rgb(153,102,0);
+    
+}
 div.detail_title span{
 	margin: 20px 0px 15px 10px;
     float:left;
     font-weight:bold;
     font-size:large;
 }
+div.wanna_try{
+    text-align:center;
+    margin-top:10px;
+}
+div.wanna_try a{
+    font-variant:small-caps;
+    text-decoration:none;
+    color:white;
+    font-weight:bolder;
+    display:block;
+    border-radius:5px;
+    box-shadow: 
+    inset 0px 11px 3px -10px rgb(153,102,0),
+    inset 0px -11px 3px -10px rgb(153,102,0);
+    text-shadow: -1px 0px 2px rgb(153,102,0), 0px 1px 2px rgb(153,102,0), 1px 0px 2px rgb(153,102,0), 0px -1px 2px rgb(153,102,0);
+    
+}
+div.wanna_try a:hover{
+    box-shadow: 
+    inset 0px 0px 3px 1px rgb(153,102,0);
+}
 div.detail_title a{
+    color:black;
     margin-left:25px;
     font-size:normal;
     font-variant: small-caps;
@@ -590,4 +620,39 @@ span.newroutehelp{
 }
 div.control{
 	margin: 5px 0px 10px 20px;
+}
+div.comments_stream{
+    padding-top:10px;
+    padding-bottom:10px;
+    border-radius:5px;
+    box-shadow: 
+    inset 0px 11px 3px -10px rgb(153,102,0),
+    inset 0px -11px 3px -10px rgb(153,102,0);
+}
+div.comment{
+    margin-top:5px;
+    margin-bottom:5px;
+}
+div.comment div.comment_author{
+    font-weight:bold;
+}
+div.comment div.comment_author a{
+    font-weight:bold;
+    color:black;
+    
+}
+div.comment div.comment_controls{
+    float:right;
+    width:15px;
+    margin-left:15px;
+}
+div.comment div.comment_controls a{
+    color:black;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+div.comment div.comment_created{
+    float:right;
+    color:grey;
 }

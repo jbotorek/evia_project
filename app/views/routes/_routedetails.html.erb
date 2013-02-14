@@ -1,6 +1,12 @@
-﻿<div id="map" class="detail_field">
+﻿<div id="maps" class="panels">
+    <div id="map" class="detail_field">
     <span class="detail_head">Here is a map of the route:</span><textarea id="gpx"><%= @route.map %></textarea>
     <div id="m" style="height:500px;"> mapa </div>
+    </div>
+</div>
+<div id="info" class="panels">
+<div class="detail_field">
+	<span class="detail_head">Title:</span> <%= @route.title %>
 </div>
 <div class="detail_field">
 	<span class="detail_head">Description:</span> <%= @route.description %>
@@ -13,6 +19,7 @@
             <%= act.title %> <br>
         <% end %>
     </div>
+</div>
 <script type="text/javascript">
 Loader.load();
 var m;

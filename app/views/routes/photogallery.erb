@@ -39,17 +39,15 @@
     } 
     </script>
 	<h1> Photogallery </h1>	
-	<div><% @all_photos.each do |photo|%>
-<div class="photo_thumb">
-<%= link_to image_tag("photogalleries/" + photo.id.to_s+ "/" + photo.image_file_name, :alt => photo.image_file_name) %>
-</div>
-   <% end %>
-
-
+	<div>
+        <% @all_photos.each do |photo|%>
+            <div class="photo_thumb">
+            <%= link_to image_tag("photogalleries/" + photo.id.to_s+ "/" + photo.image_file_name, :alt => photo.image_file_name) %>
+            </div>
+        <% end %>
         <div class="clear"> </div>
-
-</div>
+    </div>
 	
-	<br><br><br><br>
+    
 	<%= link_to 'go back to the route', @route %>
 <% end %>
