@@ -68,6 +68,10 @@ class RoutesController < ApplicationController
 	  @comment = RouteCommentRelationship.new
 	  @allcomments = @route.all_comments(@route.id)
 	  @allgalerists = galerist(@route.id)
+      @thumbnails = []
+      @allgalerists.each do |galerist|
+        @thumbnails[galerist.id] = @user.get_photos_from_galerist_to_route(galerist.id, @route.id).first
+      end
 	end
 	
 	def galerist(route_id)
