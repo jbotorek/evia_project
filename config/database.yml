@@ -2,8 +2,8 @@ development:
   adapter: postgresql
   encoding: unicode
   database: db/development
-  username: newohybat
-  password: password
+  username: Honza
+  password: spanish
   pool: 5
   timeout: 5000
 

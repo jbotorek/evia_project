@@ -37,6 +37,7 @@ Evia::Application.routes.draw do
 	match '/allwanters', to: 'users#allwanters'
 	match '/alltriers', to:'users#alltriers'	
 	match '/photogallery', to:'routes#photogallery'
+	match 'routes/:id', to:'routes#addphotos', via: :post
 
   
   root :to => 'static_pages#home'

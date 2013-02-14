@@ -14,7 +14,7 @@
 #
 
 class Asset < ActiveRecord::Base
-  attr_accessible :route_id, :image_file_name, :image, :user_id
+  attr_accessible :route_id, :image_file_name, :image, :user_id, :image_content_type
   
   belongs_to :route, :polymorphic => true 
   has_attached_file :image, 

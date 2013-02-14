@@ -5,9 +5,8 @@
 	
     <div class="field">
 		<div class ="paperclip">
-			<h2> PAPERCLIP </h2>
-			<%= file_field_tag('route_assets_asset', multiple: true, name: "route[assets_attributes][][image]") %>
-				
+			<h2> Add a photo </h2>
+			<%= file_field_tag('route_assets_asset', multiple: true, name: "route[assets_attributes][][image]") %>	
 		</div>
 	
         <%= f.label "title" %>    

@@ -8,4 +8,8 @@ module UsersHelper
 	def get_user(userid)
 		user = User.find_by_sql(["SELECT * FROM users WHERE id = ?",  userid])
 	end
+	
+	def is_route_asset_empty?(route)
+		empty = route.assets.empty?
+	end
 end

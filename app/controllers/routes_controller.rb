@@ -11,6 +11,25 @@ class RoutesController < ApplicationController
       @info = Info.find_by_user_id(@user.id)
 	end
 	
+	def addphotos	  
+	  @route = Route.find(params[:route_id].split("=>")[1].gsub("}","").to_i)			#magic to obtain ids
+	  @user = User.find(params[:user_id].split("=>")[1])								# -||-	
+	  images = params[:file_upload]["upload"]
+	  images.each do |image|
+	    asset = Asset.new(:route_id => @route.id, :user_id => @user.id,	
+			:image_file_name => image.original_filename,
+			:image_content_type => image.content_type)
+	    asset.save!																		#save to DB
+	    uploadFile(image, @route.id, @user.id, asset.id)								#copy image to given folder
+	  end
+	  flash[:success] = "Photos were added!"
+	  redirect_to @route
+	end
+	
+	def uploadFile(image, route_id, user_id, savedphoto_id)
+		post = Datafile.save(image, route_id, user_id, savedphoto_id)
+	end
+	
 	def create
 	  @user = current_user
 	  @route = current_user.routes.build(params[:route])
@@ -47,6 +66,8 @@ class RoutesController < ApplicationController
 	
 	#if the route is used in some map - the "owner" of the event becomes the owner of the route instead the original user 
 	def destroy
+	  photos = @route.assets					#delete photos associated with given route
+	  delete_photos(photos)						#
 	  event = Event.find_by_route_id(@route.id)
 	  unless event.nil?
 	    @route.update_attributes(:user_id => event.user_id)	
@@ -57,6 +78,12 @@ class RoutesController < ApplicationController
 		@route.destroy
 		flash[:success] = "Route was deleted!"
 		redirect_to current_user
+	  end
+	end
+	
+	def delete_photos(photos)
+	  photos.each do |photo|
+	    FileUtils.rm_rf("app/assets/images/photogalleries/"+photo.id.to_s)
 	  end
 	end
 	
@@ -96,6 +123,8 @@ class RoutesController < ApplicationController
 		@all_photos = current_user.get_photos_from_galerist_to_route(@photo_user.id, @route.id)
 	end
 	
+	
+	
 	def wanters
 		@route = Route.find(params[:route_id])
 		want_try = WantTryRelationship.new	
@@ -133,6 +162,7 @@ class RoutesController < ApplicationController
 			redirect_to current_user
 		end
 	end
+	
     
 	private
 	def correct_user
