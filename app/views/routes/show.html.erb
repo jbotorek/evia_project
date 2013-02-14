@@ -33,13 +33,26 @@
     }
 </script>
     <div class="detail_title">
-		<span><%= @route.title %></span><%= render 'routes/try_button' %>
+		<h1><%= @route.title %></h1>
+		<%= render 'routes/try_button' %>
 		<div class='clear'> </div>
 	</div>
     
     <div class="switch">
         <span class="half_horizontally"><a href="#maps">Mapa</a></span><span class="half_horizontally"><a href="#photos">Foto</a></span>
     </div>
+	<br><br><br>
+	<div class="">
+		<h2>Add a photo:</h2>		
+		<%= form_for :file_upload, :html => {:multipart => true} do |f| %>
+		  <%= hidden_field_tag :route_id, :value => @route.id %>
+	      <%= hidden_field_tag :user_id, :value => @user.id %>
+		  <%= f.file_field 'upload', :multiple => true%>
+		  <%= f.submit "Upload" %>
+		<% end %>
+			
+	<div>
+	
     <div id="maps" class="panels">
         <%= render 'routedetails' %>
     </div>

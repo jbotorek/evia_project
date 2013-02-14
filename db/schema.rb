@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130213131615) do
+ActiveRecord::Schema.define(:version => 20130214104004) do
 
   create_table "activity_types", :force => true do |t|
     t.string   "title"
@@ -33,6 +33,11 @@ ActiveRecord::Schema.define(:version => 20130213131615) do
 
   add_index "assets", ["route_id"], :name => "index_assets_on_route_id"
   add_index "assets", ["user_id"], :name => "index_assets_on_user_id"
+
+  create_table "datafiles", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "event_attends", :force => true do |t|
     t.integer  "attendee_id"

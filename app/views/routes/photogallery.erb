@@ -38,19 +38,19 @@
         });
     } 
     </script>
-	<h1> Photogallery </h1>	
-<<<<<<< HEAD
-	<%= @photo_user.email %>
-	<br>
-	<% @all_photos.each do |photo|%>
-		<%= photo.image_file_name %> 
-		<%= photo.id.to_s %>
-		<%= image_tag("photogalleries/" + photo.id.to_s+ "/" + photo.image_file_name, 
-				 :size => "200x200", :alt => photo.image_file_name) %>
-		<br><br>
+	<div class = "photogallery">
+		<h1> Photogallery </h1>	
+		<%= @photo_user.email %>
+		<br>
+		<% @all_photos.each do |photo|%>
+			<%= photo.image_file_name %> 
+			<%= photo.id.to_s %>
+			<%= image_tag("photogalleries/" + photo.id.to_s+ "/" + photo.image_file_name, 
+					 :size => "200x200", :alt => photo.image_file_name) %>
+			<br><br>
 
-	<% end %>
-        <div class="clear"> </div>
+		<% end %>
+		<div class="clear"> </div>
 	</div>
 	
 	<br><br><br><br>
