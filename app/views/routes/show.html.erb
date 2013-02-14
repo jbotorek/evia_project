@@ -42,16 +42,17 @@
         <span class="half_horizontally"><a href="#maps">Mapa</a></span><span class="half_horizontally"><a href="#photos">Foto</a></span>
     </div>
 	<br><br><br>
-	<div class="">
-		<h2>Add a photo:</h2>		
-		<%= form_for :file_upload, :html => {:multipart => true} do |f| %>
-		  <%= hidden_field_tag :route_id, :value => @route.id %>
-	      <%= hidden_field_tag :user_id, :value => @user.id %>
-		  <%= f.file_field 'upload', :multiple => true%>
-		  <%= f.submit "Upload" %>
-		<% end %>
-			
-	<div>
+	<% if current_user.tried?(@route) %>
+		<div class="">
+			<h2>Add a photo:</h2>		
+			<%= form_for :file_upload, :html => {:multipart => true} do |f| %>
+			  <%= hidden_field_tag :route_id, :value => @route.id %>
+			  <%= hidden_field_tag :user_id, :value => @user.id %>
+			  <%= f.file_field 'upload', :multiple => true%>
+			  <%= f.submit "Upload" %>
+			<% end %>			
+		<div>
+	<% end %>
 	
     <div id="maps" class="panels">
         <%= render 'routedetails' %>
