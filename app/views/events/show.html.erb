@@ -1,5 +1,10 @@
 <% provide(:title, @event.title) %>
 <% content_for :showcase do %>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            initMap();
+        });
+    </script>
     <div class="detail_title">
         <span><%= @event.title %></span><%= render 'attend' %>
         <div class='clear'> </div>

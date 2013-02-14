@@ -36,6 +36,7 @@ class EventsController < ApplicationController
 	@event = Event.find(params[:id])
 	@route = Route.find(@event.route_id)
 	@activity = ActivityType.find(@event.event_type_id)
+    @activities = @route.activity_types
 	@comment = EventCommentRelationship.new
 	@allcomments = @event.all_comments(@event.id)
 	@user = current_user
