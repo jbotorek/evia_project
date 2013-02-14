@@ -7,12 +7,19 @@
     });
     $(document).ready(function(){
         $('.panels').hide();
-        $('#info').fadeIn();
+        $(window.location.hash).fadeIn();
+        checkWhetherRenderMap(window.location.hash);
         $('.switch a').click(function(){
             $('.panels').hide();
             $(this.hash).fadeIn();
+            checkWhetherRenderMap(this.hash);
         });
     });
+    function checkWhetherRenderMap(hash){
+        if(hash=="#maps"){
+            initMap();
+        }
+    }
     function fitGalleryThumbs(){
         $('.gallery_thumb').find('img').each(function(){ 
             var thumbWidth = $('.gallery_thumb').css('width').match(/([0-9]+)/)[0];
@@ -48,7 +55,7 @@
     <%= render 'routedetails' %>
     <div id="gallery" class="panels">
         <% if current_user.tried?(@route) %>
-		<div class="">
+		<div class="nic">
 			<h2>Add a photo:</h2>		
 			<%= form_for :file_upload, :html => {:multipart => true} do |f| %>
 			  <%= hidden_field_tag :route_id, :value => @route.id %>
@@ -66,7 +73,7 @@
                        <div class="gallery_thumb"><%= image_tag('photogalleries/' + photo.id.to_s+ '/' + photo.image_file_name, :alt => photo.image_file_name) %></div>
                         <span><%= gal.email%></span>
                     <% end %>
-                </div>
+            </div>
         <% end %>
             <div class="clear"> </div>
     </div>

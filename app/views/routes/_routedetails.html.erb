@@ -26,24 +26,31 @@ var m;
 var center;
 var layer;
 var trasaLayer;
+var inited = 0;
 var criterion = "<%= @route.criterion %>";
 $(document).ready(function(){
     $("#gpx").hide();
-    var center = SMap.Coords.fromWGS84(15.335764, 49.742466);
-    m = new SMap(JAK.gel("m"), center, 0);
-    m.addDefaultLayer(SMap.DEF_TURIST).enable();
-    m.addDefaultControls(); 
-    layer = new SMap.Layer.Marker();
-    m.addLayer(layer);
-    layer.enable();
-    trasaLayer = new SMap.Layer.Geometry();
-    m.addLayer(trasaLayer).enable();
-    var mouse = new SMap.Control.Mouse(SMap.MOUSE_PAN | SMap.MOUSE_WHEEL | SMap.MOUSE_ZOOM);
-    m.addControl(mouse);
-    load();
-    renderMap();
+
 });
 var points=[];
+function initMap(){
+    if(inited==0){
+        var center = SMap.Coords.fromWGS84(15.335764, 49.742466);
+        m = new SMap(JAK.gel("m"), center, 0);
+        m.addDefaultLayer(SMap.DEF_TURIST).enable();
+        m.addDefaultControls(); 
+        layer = new SMap.Layer.Marker();
+        m.addLayer(layer);
+        layer.enable();
+        trasaLayer = new SMap.Layer.Geometry();
+        m.addLayer(trasaLayer).enable();
+        var mouse = new SMap.Control.Mouse(SMap.MOUSE_PAN | SMap.MOUSE_WHEEL | SMap.MOUSE_ZOOM);
+        m.addControl(mouse);
+        load();
+        renderMap();
+        inited = 1;
+    }
+}
 function addPoints(){
         $('#points').html('');
         layer.removeAll();
