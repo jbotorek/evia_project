@@ -1,4 +1,7 @@
-﻿<% content_for :showcase do %>
+﻿<% content_for :javascripts do %>
+    <%= javascript_include_tag 'http://api4.mapy.cz/loader.js','demand/maps','demand/maps_geocode','demand/route_new' %>
+<% end %>
+<% content_for :showcase do %>
 <div class="form">
     <h1>New route</h1>
 	<span class="newroutehelp" title="Specify your route by clicking to the interactive map. You can zoom and move the map.
@@ -11,9 +14,7 @@
 			  :title => "If you want to add exact spot to your route map, you can use this field. When address is found, it will be added to your route automatically." %>
               <div class="find_address"><%= submit_tag "Find", :class => 'action_button' %></div>
         <% end %>
-        <div id="control"><a href="#" class="map_control" title="activates and deactivates the 'Place Picker'">
-			Turn ON place picker
-		</a></div>
+        <div id="control"><a href="" class="map_control" title="activates and deactivates the 'Place Picker'">Turn ON place picker</a></div>
         <div id="points" style="background-color:red;"></div>
         <div id="m" style="height:500px">mapa</div>
         <div>
@@ -31,179 +32,4 @@
     </div>
     <%= render 'form' %>
 </div>
- <%= javascript_include_tag 'http://api4.mapy.cz/loader.js' %>
- <script>
-    Loader.load();
-    
-var m;
-var layer;
-var trasaLayer;
-var mapClick;
-var clickOn=false;
-var criterion = "bike1";
-
-$(document).ready(function(){
-    var center = SMap.Coords.fromWGS84(15.335764, 49.742466);
-    m = new SMap(JAK.gel("m"), center, 0);
-    m.addDefaultLayer(SMap.DEF_TURIST).enable();
-    m.addDefaultControls(); 
-    layer = new SMap.Layer.Marker();
-    m.addLayer(layer);
-    layer.enable();
-    trasaLayer = new SMap.Layer.Geometry();
-    m.addLayer(trasaLayer).enable();
-    var mouse = new SMap.Control.Mouse(SMap.MOUSE_PAN | SMap.MOUSE_WHEEL | SMap.MOUSE_ZOOM);
-    m.addControl(mouse);
-    function geokoduj(e, elm) {  /* Voláno při odeslání */
-        JAK.Events.cancelDef(e); /* Zamezit odeslání formuláře */
-        var query = JAK.gel("query").value;
-        new SMap.Geocoder(query, odpoved, {});
-    }
-
-    function odpoved(geocoder) { /* Odpověď */
-        if (!geocoder.getResults().length) {
-            alert("Tohle neznáme.");
-            return;
-        }
-        
-        var vysledky = geocoder.getResults()[0].results;
-        var data;
-        while(vysledky.length){
-            var item = vysledky.shift();
-            $('#points').append("<a href='javascript:selectOneAndAddToMap("+item.coords.x+","+item.coords.y+",\""+item.label+"\");'>"+item.label+"</a><br />");
-        }
-    }
-
-    var form = JAK.gel("getCoords");
-    JAK.Events.addListener(form, "submit", geokoduj); /* Při odeslání formuláře pustit geokódování */
-});
-$(document).ready(function(){
-    criterion = $('#select_criterion').val();
-    $('#route_criterion').val(criterion);
-    $('#select_criterion').change(function(){
-        criterion = $(this).val();
-        $('#route_criterion').val(criterion);
-        renderMap();
-    });
-});
-function routeToGpx(){
-    var gpx = '';
-    gpx = gpx + '<gpx creator="eVia" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">'
-    gpx = gpx + '<trk><name>'+$('#route_title').val()+'</name>';
-    gpx = gpx + '<trkseg>';
-    for (i=0;i<points.length;i++){
-        p = points[i];
-        wgspoint = p[0].toWGS84(0);
-        gpx = gpx + '<trkpt lat="'+wgspoint[1]+'" lon="'+wgspoint[0]+'"><name>'+p[4]+'</name></trkpt>'
-    }
-    gpx = gpx + '</trkseg>';
-    gpx = gpx + '</trk></gpx>';
-    $('#route_map').val(gpx);
-
-}
-
-function selectOneAndAddToMap(coordX,coordY,label){
-    var point = [];
-    point[0] = SMap.Coords.fromPP(coordX,coordY);
-    point[4] = label;
-    points.push(point);
-    $('#points').html('');
-    renderMap();
-}
-
-$('#control a').click(function(){
-        if(clickOn==false){
-            turnClickOn();
-            clickOn = true;
-            $(this).html("Turn OFF place picker");
-        }else{
-            clickOn = false;
-            turnClickOff();
-            $(this).html("Turn ON place picker");
-        }
-    });
-
-function turnClickOn(){
-    mapClick = m.getSignals().addListener(window, "map-click", click);
-}
-
-function turnClickOff(){
-    m.getSignals().removeListener(mapClick);
-}
-function click(e, elm) { 
-    var coords = SMap.Coords.fromEvent(e.data.event, m);
-    var point = [];
-    point[0]=coords;
-    points.push(point);
-    var last = (points.length>0)?(points.length-1):0;
-    new SMap.Geocoder.Reverse(coords, getLabel, {count:1,offset:last});
-    $('#control a').click();
-}
-function getLabel(geocoder) {
-    if (geocoder.getResults()==undefined) {
-        alert("Tohle neznáme.");
-        return;
-    }
-    points[geocoder._options.offset][4]=geocoder.getResults().label;
-    
-    renderMap();
-    
-}
-var points=[];
-function addPoints(){
-        $('#points').html('');
-        layer.removeAll();
-        for(var i=0;i<points.length;i++){
-            var marker = new SMap.Marker(points[i][0],"marker"+i,{});
-            layer.addMarker(marker);
-            if(points.length == 1){
-                m.setCenter(points[0][0]);
-            }
-            var card = new SMap.Card();
-            card.getHeader().innerHTML = "<strong>"+points[i][4]+"</strong>";
-            card.getBody().innerHTML = "<a href=\"javascript:removePoint('"+i+"')\">odebrat</a>!";
-            marker.decorate(SMap.Marker.Feature.Card,card);
-            points[i][1]=marker;
-            points[i][2]=card;
-        }
-        layer.redraw();
-}
-function removePoint(offset){
-    m.removeCard();
-    points.splice(offset,1);
-    renderMap();
-}
-function getPointsCoords(){
-    var coords=[];
-    for(var i=0;i<points.length;i++){
-        coords.push(points[i][0]);
-    }
-    return coords;
-}
-
-function renderMap(){
-    $(document).ready(function(){
-        trasaLayer.removeAll();
-        addPoints();
-        if(points.length>1){
-            var route = new SMap.Route(getPointsCoords(), addToMap, {criterion:criterion});
-        }
-        /*var options = {};
-        var marker = new SMap.Marker(center, "myMarker", options);
-        layer.addMarker(marker);
-        var point = SMap.Coords.fromWGS84(16.9654061,49.0);
-        var anotherMarker  = new SMap.Marker(point, "another", options);
-        layer.addMarker(anotherMarker);
-        route = new SMap.Route([center,point], addToMap, {criterion:"bike1"});*/
-    });
-}
-var addToMap = function(route){
-    var coords = route.getResults().geometry;
-    var cz = m.computeCenterZoom(coords);
-    m.setCenterZoom(cz[0], cz[1]);
-    var g = new SMap.Geometry(SMap.GEOMETRY_POLYLINE, null, coords);
-    trasaLayer.addGeometry(g);
-}
-
-</script>
 <% end %>

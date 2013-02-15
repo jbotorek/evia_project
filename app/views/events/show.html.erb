@@ -1,10 +1,8 @@
 <% provide(:title, @event.title) %>
+<% content_for :javascripts do %>
+    <%= javascript_include_tag 'http://api4.mapy.cz/loader.js','demand/maps','demand/event_show' %>
+<% end %>
 <% content_for :showcase do %>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            initMap();
-        });
-    </script>
     <div class="detail_title">
         <span><%= @event.title %></span><%= render 'attend' %>
         <div class='clear'> </div>

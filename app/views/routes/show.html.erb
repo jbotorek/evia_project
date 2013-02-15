@@ -1,48 +1,8 @@
 <% provide(:title, @route.title) %>
+<% content_for :javascripts do %>
+    <%= javascript_include_tag 'http://api4.mapy.cz/loader.js','demand/maps','demand/thumbs', 'demand/route_show' %>  
+<% end %>
 <% content_for :showcase do %>
-<script type="text/javascript">
-    var detailOn = false;
-    $(window).load(function(){
-    fitGalleryThumbs(); 
-    });
-    $(document).ready(function(){
-        $('.panels').hide();
-        if(window.location.hash==""){
-            window.location.hash="info";
-        }
-        var hash = window.location.hash;
-        $(hash).fadeIn();
-        checkWhetherRenderMap(hash);
-        $('.switch a').click(function(){
-            $('.panels').hide();
-            $(this.hash).fadeIn();
-            checkWhetherRenderMap(this.hash);
-        });
-    });
-    function checkWhetherRenderMap(hash){
-        if(hash=="#maps"){
-            initMap();
-        }
-    }
-    function fitGalleryThumbs(){
-        $('.gallery_thumb').find('img').each(function(){ 
-            var thumbWidth = $('.gallery_thumb').css('width').match(/([0-9]+)/)[0];
-            var thumbHeight = $('.gallery_thumb').css('height').match(/([0-9]+)/)[0];
-            var originalWidth = this.width;
-            var originalHeight = this.height;
-            var imgClass = ((this.width-thumbWidth)/(this.height-thumbHeight) > 1) ? 'wide' : 'tall';
-            if((this.width/thumbWidth)/(this.height/thumbHeight) > 1){
-                $(this).width("auto").height(thumbHeight+"px");
-                ratio = originalHeight/thumbHeight;
-                $(this).css('margin-left',-(originalWidth/ratio-thumbWidth)/2);
-            }else{
-                $(this).width(thumbWidth+"px").height("auto");
-                ratio = originalWidth/thumbWidth;
-                $(this).css('margin-top',-(originalHeight/ratio-thumbHeight)/2);
-            }
-        });
-    }
-</script>    
     <div class="switch summary_part">
         <span class="half_horizontally">
             <span class="half_horizontally"><a href="#info">Info</a></span>
@@ -59,7 +19,7 @@
     <%= render 'routedetails' %>
     <div id="gallery" class="panels">
         <% if current_user.tried?(@route) %>
-			<div class="nic">
+			<div class="form">
 				<h2>Add a photo:</h2>		
 				<%= form_for :file_upload, :html => {:multipart => true} do |f| %>
 				  <%= hidden_field_tag :route_id, :value => @route.id %>
@@ -87,7 +47,6 @@
         <span class="half_horizontally"><%= render 'tried' %></span>
     </div>
     <div id="comments" class="panels">
-        tak co?
         <div class="form">
             <%= render 'route_new_comment' %>
         </div>

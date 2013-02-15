@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 
 $(function() {
 	$( "#event_time" ).datepicker({ dateFormat: 'dd.mm.yy',  showWeek: true, firstDay: 1 });

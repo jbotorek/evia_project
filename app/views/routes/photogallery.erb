@@ -1,56 +1,22 @@
+<% content_for :javascripts do %>
+    <%= javascript_include_tag 'demand/thumbs', 'demand/route_photogallery' %>
+<% end %>
 <% content_for :showcase do %>
-    <script type="text/javascript">
-    $(window).load(function(){
-        fitPhotoThumbs();
-        
-        $('.photo_thumb a').click(function(ev){
-            ev.preventDefault();
-            var img = $(this).find('img');
-            $('#photo_detail').html('');
-            img.clone().appendTo('#photo_detail');
-            $('#photo_detail').show();
-            detailOn = true;
-            var imgClass = (img.width/img.height > 1) ? 'wide' : 'tall';
-            /** removing styles assigned to pictures by fitPhotoThumbs namely width, height, margin-top, margin-left **/
-            $('#photo_detail > img').css("width","").css("height","").css("margin-top","").css("margin-left","").addClass(imgClass);
-            
-        });
-        $('#photo_detail').click(function(){
-            $('#photo_detail').hide();
-        });
-    });
-    function fitPhotoThumbs(){
-        $('.photo_thumb').find('img').each(function(){ 
-            var thumbWidth = $('.photo_thumb').css('width').match(/([0-9]+)/)[0];
-            var thumbHeight = $('.photo_thumb').css('height').match(/([0-9]+)/)[0];
-            var originalWidth = this.width;
-            var originalHeight = this.height;
-            var imgClass = ((this.width-thumbWidth)/(this.height-thumbHeight) > 1) ? 'wide' : 'tall';
-            if((this.width/thumbWidth)/(this.height/thumbHeight) > 1){
-                $(this).css("width","auto").css("height",thumbHeight+"px");
-                ratio = originalHeight/thumbHeight;
-                $(this).css('margin-left',-(originalWidth/ratio-thumbWidth)/2);
-            }else{
-                $(this).css("width",thumbWidth+"px").css("height","auto");
-                ratio = originalWidth/thumbWidth;
-                $(this).css('margin-top',-(originalHeight/ratio-thumbHeight)/2);
-            }
-        });
-    } 
-    </script>
-
 	<h1> Photogallery </h1>	
 	<div>
         <% @all_photos.each do |photo|%>
-            <div class="photo_thumb">
-				<%= link_to image_tag("photogalleries/" + photo.id.to_s+ "/" + photo.image_file_name, :alt => photo.image_file_name) %>
+            <div class="photo_container">
+                <div class="photo_thumb"> 
+                    <%= link_to image_tag("photogalleries/" + photo.id.to_s+ "/" + photo.image_file_name, :alt => photo.image_file_name) %>
+                </div>
+                <% if photo.is_owner?(current_user) %>
+                        <div class="photo_controls">
+                            <%= link_to 'x', :controller => :routes, :action => :delete_photo_from_photogallery,
+                                :route_id => @route.id, :photo_id => photo.id%>
+                        </div>
+                        <div class="clear"> </div>
+                <% end %>
             </div>
-			<% if photo.is_owner?(current_user) %>
-				<div class="delete_photo_button">
-					<%= link_to 'X', :controller => :routes, :action => :delete_photo_from_photogallery,
-						:route_id => @route.id, :photo_id => photo.id%>
-				</div>
-			<% end %>
         <% end %>
         <div class="clear"> </div>
     </div>	

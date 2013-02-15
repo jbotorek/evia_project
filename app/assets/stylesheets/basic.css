@@ -128,15 +128,15 @@ header#site_head a{
         margin-left:-480px;
     }
     section{
-      padding: 5px 5px 5px 5px;
-      margin: 5px 5px 5px 5px;
+      padding: 2px 2px 2px 2px;
+      margin: 2px 2px 2px 2px;
       background-color:#FFFFFF;
       border-radius:5px;
       box-shadow: inset 0px 0px 3px rgb(153,102,0);
 	  color:#404040;
     }
     section#summary{
-      width: 260px;
+      width: 240px;
       float:left;
     }
     section#controls{
@@ -145,7 +145,7 @@ header#site_head a{
     }
     section#showcase{
       float:right;
-      width: 650px;
+      width: 700px;
     }
     section#more{
       clear:both;  
@@ -444,25 +444,45 @@ div.photo_gallery{
     background: #444;
     margin: 0 auto;
 }
-
+div.photo_container{
+    
+    margin-bottom:5px;
+    margin-top:5px;
+    margin-left:2px;
+    margin-right:3px;
+    padding:1px 1px 1px 1px;
+    float:left;
+}
 div.photo_thumb{
     width:200px;
     height:135px;
     float:left;
     text-align:center;
     overflow:hidden;
-    margin-bottom:5px;
-    margin-top:5px;
-    margin-left:2px;
-    margin-right:3px;
+}
+div.photo_controls{
+    display:block;
+    float:left;
+    opacity:0.0;
+}
+div.photo_controls a{
+    color:white;
+    font-weight:bold;
+    text-decoration:none;
+}
+div.photo_container:hover div.photo_controls{
+    opacity:1.0;
+}
+div.photo_container:hover{
+    background-color:grey;
+    border-radius:5px;
 }
 div.gallery_entry{
     display:inline-block;
     text-align:center;
     margin-bottom:5px;
     margin-top:5px;
-    margin-left:2px;
-    margin-right:3px;
+    margin-left:5px;
 }
 div.gallery_entry span{
     display:inline-block;
@@ -477,8 +497,8 @@ div.gallery_entry a{
     font-weight:bold;
 }
 div.gallery_thumb{
-    width:250px;
-    height:200px;
+    width:200px;
+    height:150px;
     text-align:center;
     box-shadow:0px 0px 3px 1px black;
     overflow:hidden;
