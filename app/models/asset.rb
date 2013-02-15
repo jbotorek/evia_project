@@ -20,14 +20,21 @@ class Asset < ActiveRecord::Base
   has_attached_file :image, 
 					:url  => "/assets/routes/:id/:basename.:extension",
 					:path => ":rails_root/app/assets/images/photogalleries/:id/:basename.:extension"
-					
-  validates :image_file_name, presence: true, uniqueness: true
+	
+  before_create :randomize_file_name
+  
+  validates :image_file_name, presence: true
   
   #method used when saving new image/images - according to the given route it returns
   #array of images without user_id provided
   def notUsersSet(routeid)
     notUsers = Asset.find_by_sql(["SELECT * FROM assets WHERE (route_id = ?) AND (user_id is null)",
 	routeid])
+  end  
+  
+  def randomize_file_name
+    extension = File.extname(image_file_name).downcase
+    self.image.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
   end
   
 end
