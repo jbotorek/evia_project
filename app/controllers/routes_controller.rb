@@ -20,14 +20,15 @@ class RoutesController < ApplicationController
 			:image_file_name => image.original_filename,
 			:image_content_type => image.content_type)
 	    asset.save!																		#save to DB
-	    uploadFile(image, @route.id, @user.id, asset.id)								#copy image to given folder
+		encoded_name = asset.image_file_name
+	    uploadFile(image, @route.id, @user.id, asset.id, encoded_name)								#copy image to given folder
 	  end
 	  flash[:success] = "Photos were added!"
 	  redirect_to @route
 	end
 	
-	def uploadFile(image, route_id, user_id, savedphoto_id)
-		post = Datafile.save(image, route_id, user_id, savedphoto_id)
+	def uploadFile(image, route_id, user_id, savedphoto_id, encoded_name)
+		post = Datafile.save(image, route_id, user_id, savedphoto_id, encoded_name)
 	end
 	
 	def create
