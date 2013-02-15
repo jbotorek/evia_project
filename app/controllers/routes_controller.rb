@@ -31,6 +31,16 @@ class RoutesController < ApplicationController
 		post = Datafile.save(image, route_id, user_id, savedphoto_id, encoded_name)
 	end
 	
+	def delete_photo_from_photogallery
+	  @user = current_user
+	  @route = Route.find(params[:route_id])
+	  @photo = Asset.find(params[:photo_id])
+	  delete_photo(@photo)
+	  @photo.destroy
+	  flash[:success] = "photo was deleted"
+	  redirect_to @route
+	end
+	
 	def create
 	  @user = current_user
 	  @route = current_user.routes.build(params[:route])
@@ -82,9 +92,13 @@ class RoutesController < ApplicationController
 	  end
 	end
 	
+	def delete_photo(photo)
+	  FileUtils.rm_rf("app/assets/images/photogalleries/"+photo.id.to_s)
+	end
+	
 	def delete_photos(photos)
 	  photos.each do |photo|
-	    FileUtils.rm_rf("app/assets/images/photogalleries/"+photo.id.to_s)
+	    delete_photo(photo)
 	  end
 	end
 	

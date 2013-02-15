@@ -43,12 +43,17 @@
 	<div>
         <% @all_photos.each do |photo|%>
             <div class="photo_thumb">
-            <%= link_to image_tag("photogalleries/" + photo.id.to_s+ "/" + photo.image_file_name, :alt => photo.image_file_name) %>
+				<%= link_to image_tag("photogalleries/" + photo.id.to_s+ "/" + photo.image_file_name, :alt => photo.image_file_name) %>
             </div>
+			<% if photo.is_owner?(current_user) %>
+				<div class="delete_photo_button">
+					<%= link_to 'X', :controller => :routes, :action => :delete_photo_from_photogallery,
+						:route_id => @route.id, :photo_id => photo.id%>
+				</div>
+			<% end %>
         <% end %>
         <div class="clear"> </div>
-    </div>
-	
+    </div>	
     
-	<%= link_to 'go back to the route', @route %>
+	<%= link_to 'go back to the route', @route, :class => "back_button"%>
 <% end %>

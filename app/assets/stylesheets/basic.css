@@ -446,8 +446,8 @@ div.photo_gallery{
 }
 
 div.photo_thumb{
-    width:250px;
-    height:185px;
+    width:200px;
+    height:135px;
     float:left;
     text-align:center;
     overflow:hidden;

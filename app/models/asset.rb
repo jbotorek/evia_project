@@ -37,4 +37,8 @@ class Asset < ActiveRecord::Base
     self.image.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
   end
   
+  def is_owner?(user)
+	user.id == self.user_id
+  end
+  
 end
