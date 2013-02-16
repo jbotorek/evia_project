@@ -14,10 +14,5 @@ ActivityType.create(title: 'roller skates', description: 'moving on roller skate
 ActivityType.create(title: 'running', description: 'run,run,run...')
 
 User.create(email: 'petr24616@seznam.cz', password:'petrpetr', password_confirmation:'petrpetr')
-Route.create(user_id: 1, title: 'prvni cesta', description: 'hezka prvni cesta', map: 'xyz 12.435,2352', activity_type_id: 1)
-Route.create(user_id: 1, title: 'druha cesta', description: 'hnusna druha cesta', map: 'zyx 12.435,2352', activity_type_id: 1)
 
-RouteActivityRelation.create(route_id: 1, activity_type_id: 1)
-RouteActivityRelation.create(route_id: 1, activity_type_id: 2)
-RouteActivityRelation.create(route_id: 2, activity_type_id: 3)
 

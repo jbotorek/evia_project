@@ -224,8 +224,9 @@ header#site_head a{
     span.stats_info{
         color:white;
         width:100%;
-        margin-top:-5px;
+        margin-top:-2px;
         margin-bottom:-5px;
+		font-size: 90%;
         display:block;
         z-index:0;
         text-align:center;

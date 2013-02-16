@@ -10,6 +10,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  activity_type_id :integer
+#  criterion        :string(255)
 #
 
 class Route < ActiveRecord::Base

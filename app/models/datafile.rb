@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: datafiles
+#
+#  id         :integer          not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 #Simple model that saves images into specific file location
 class Datafile < ActiveRecord::Base
   def self.save(image,route_id,user_id,savedphoto_id, encoded_name)
