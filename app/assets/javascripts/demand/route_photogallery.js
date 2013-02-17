@@ -1,6 +1,7 @@
-$(document).ready(function(){
+$(window).load(function(){
     fitThumbs(".photo_thumb");
-    
+});
+$(document).ready(function(){
     $('.photo_thumb a').click(function(ev){
         ev.preventDefault();
         var img = $(this).find('img');

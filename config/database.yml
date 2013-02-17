@@ -2,8 +2,8 @@ development:
   adapter: postgresql
   encoding: unicode
   database: db/development
-  username: Honza
-  password: spanish
+  username: newohybat
+  password: password
   pool: 5
   timeout: 5000
 
@@ -14,8 +14,8 @@ test:
   adapter: postgresql
   encoding: unicode
   database: db/test
-  username: Honza
-  password: spanish
+  username: newohybat
+  password: password
   pool: 5
   timeout: 5000
 #  username: newohybat
