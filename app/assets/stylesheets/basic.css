@@ -58,7 +58,7 @@ header#site_head a{
 
 		nav.head_nav {
 			float: right;
-			margin-top: 13px;
+			margin-top: -5px;
 		}
 
 		nav.head_nav ul li {
